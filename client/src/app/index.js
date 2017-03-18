@@ -5,5 +5,5 @@ import store from 'app/core/store';
 import App from 'app/core';
 
 
-render(<App/>,
+render(<Provider store={store}><App/></Provider>,
        document.getElementById('app'));

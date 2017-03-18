@@ -13,6 +13,6 @@ module.exports = {
     nameCleaner: (path) => path.replace(/^src\//, '')
   },
   plugins: {
-    babel: {presets: ['latest', 'react']}
+    babel: {presets: ['es2015', 'react']}
   }
 };

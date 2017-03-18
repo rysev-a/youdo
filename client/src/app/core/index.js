@@ -2,7 +2,9 @@ import React from 'react';
 import {Component} from 'react';
 import {render} from 'react-dom';
 import {BrowserRouter as Router, Route, NavLink, Switch} from 'react-router-dom';
-import {AppView, StartView, UserView} from './view';
+import view from 'app/core/view';
+import tasks from 'app/tasks';
+import Navbar from 'app/core/components/navbar';
 
 
 class App extends Component {
@@ -10,16 +12,10 @@ class App extends Component {
     return (
       <Router>
         <main>
-          <nav>
-            <NavLink activeClassName="active" to='/'>home</NavLink>
-            <NavLink activeClassName="active" to='/data'>data</NavLink>
-            <NavLink activeClassName="active" to='/users'>users</NavLink>
-
-          </nav>
+          <Navbar/>
           <Switch>
-            <Route exact={true} path='/' component={StartView}/>
-            <Route path='/data' component={AppView}/>
-            <Route path='/users' component={UserView}/>
+            <Route exact={true} path='/' component={view}/>
+            <Route path='/tasks' component={tasks}/>
           </Switch>
         </main>
       </Router>

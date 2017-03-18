@@ -1,0 +1,87 @@
+@import '../variables'
+
+navbar-link()
+  text-decoration none
+  color #fff
+  height 30px
+  line-height 30px
+  margin 10px 0 0
+  display inline-block
+  padding 10px 15px
+  transition background ease-in-out 0.3s
+  cursor pointer
+  
+
+.navbar
+  background linear-gradient(60deg, #ab47bc, #8e24aa);
+  height 70px
+  vertical-align middle
+  
+  &__logo
+    navbar-link()
+    font-size 18px
+    
+    &:active
+      background rgba(255, 255, 255, 0.1)
+      border-radius 3px
+
+  &__links
+    float right
+    
+    &-item
+      navbar-link()
+
+    &-item&-profile
+      color #fff
+      display inline-block
+
+      .caret
+        margin-left 5px
+
+      .material-icons
+        position relative
+        top 6px
+        right 5px
+
+    .dropdown
+      display inline-block
+      position relative
+      
+      .dropdown-menu
+        border-radius 4px
+        color #000
+        background #fff
+        z-index 10000
+        opacity 0
+        top 100%
+        visibility hidden
+        transition all 150ms linear
+        box-shadow 0 2px 5px 0 rgba(0, 0, 0, 0.26)
+        position absolute
+        min-width 160px
+        padding 5px 0
+        margin 2px 0 0
+        font-size 14px
+        text-align left
+        margin-top -20px
+        
+        &__item
+          display block
+          font-size 13px
+          padding 10px 20px
+          margin 0 5px
+          border-radius 2px
+          transition background 150ms linear
+          transition color 150ms linear
+          cursor pointer
+          
+          &:hover
+            background mainColor
+            box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
+            color #fff
+
+      &.open
+        .dropdown-menu
+          opacity 1
+          visibility visible
+          margin-top 0
