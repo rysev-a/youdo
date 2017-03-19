@@ -1,23 +1,21 @@
 import constants from 'app/bootstrap/constants';
 
-let anonymous = ()=> {
+let defaultState = ()=> {
   return {
-    loading: false,
     is_authenticated: false
   }
 }
 
-function current(state = anonymous(), action) {
-  
-  switch(action.type) {
+function current(state=defaultState(), action) {
+    switch(action.type) {
     case constants.LOGOUT_CURRENT_USER_SUCCESS:
-      return anonymous();
+      return defaultState();
 
     case constants.SUBMIT_LOGIN_FORM_SUCCESS:
     case constants.SUBMIT_REGISTRATION_FORM_SUCCESS:
     case constants.SUBMIT_PROFILE_FORM_SUCCESS:
     case constants.FETCH_CURRENT_USER_SUCCESS:
-      return Object.assign(action.payload, {loading: false});
+      return action.payload;
 
     default:
       return state;

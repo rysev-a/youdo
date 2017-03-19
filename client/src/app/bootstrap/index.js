@@ -1,31 +1,28 @@
 import React from 'react';
-import {Component} from 'react';
-import {render} from 'react-dom';
-import {BrowserRouter as Router, Route, NavLink, Switch} from 'react-router-dom';
-import login from 'app/profile/login';
-import register from 'app/profile/register';
+import {BrowserRouter} from 'react-router-dom';
 
-import view from './view';
 import Navbar from 'app/navbar';
 
+// import modules
+import map from 'app/map';
 import tasks from 'app/tasks';
 import profile from 'app/profile';
 
-class App extends Component {
-  render() {
-    return (
-      <Router>
-        <main>
-          <Navbar/>
-          <Switch>
-            <Route exact={true} path='/' component={view}/>
-            {tasks}
-            {profile}
-          </Switch>
-        </main>
-      </Router>
-    );
-  }
-}
 
-export default App;
+import store from './store';
+import profileCurrentActions from 'app/profile/current/actions';
+store.dispatch(profileCurrentActions.fetch());
+
+
+const App = ()=> (
+  <BrowserRouter>
+    <main>
+      <Navbar/>
+      {map}
+      {tasks}
+      {profile}
+    </main>
+  </BrowserRouter>
+)
+
+export default App

@@ -14,6 +14,12 @@ user_fields = {
     'email': fields.String
 }
 
+profile_fields = {
+    'id': fields.Integer,
+    'email': fields.String,
+    'is_authenticated': fields.Boolean
+}
+
 class UserList(Resource):
     def get(self):
         parser = reqparse.RequestParser()
@@ -69,7 +75,7 @@ class ProfileLogin(Resource):
             return {'status': 'invalid password'}, 400
 
         login_user(user)
-        return marshal(user, user_fields)
+        return marshal(user, profile_fields)
 
 
 class ProfileCurrent(Resource):
@@ -77,7 +83,7 @@ class ProfileCurrent(Resource):
         if not current_user.is_authenticated:
             return {'error': 'authorization required'}, 400
         
-        return marshal(current_user, user_fields), 200       
+        return marshal(current_user, profile_fields), 200       
 
 
 class ProfileLogout(Resource):
@@ -101,5 +107,5 @@ class ProfileRegister(Resource):
         db.session.commit()
         login_user(user, remember=True)
 
-        return marshal(user, user_fields), 200
+        return marshal(user, profile_fields), 200
 

@@ -1,3 +1,4 @@
+import {browserHistory} from 'react-router-dom';
 import constants from 'app/bootstrap/constants';
 import api from '../api';
 

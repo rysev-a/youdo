@@ -6,19 +6,11 @@ const baseUrl = `${API_URL}/parsers`;
 
 const api = {
   login: (profile)=> {
-    return fetch(`${API_URS}/profile/login`, {
+    return fetch(`${API_URL}/profile/login`, {
       method: 'post',
       headers: API_HEADERS,
       credentials: 'include',
       body: JSON.stringify(profile)
-    });
-  },
-
-  logout: ()=> {
-    return fetch(`${API_URL}/profile/logout`, {
-      method: 'post',
-      headers: API_HEADERS,
-      credentials: 'include'
     });
   },
 
@@ -36,6 +28,14 @@ const api = {
       method: 'get',
       headers: API_HEADERS,
       credentials: 'include',
+    });
+  },
+
+  logout: ()=> {
+    return fetch(`${API_URL}/profile/logout`, {
+      method: 'post',
+      headers: API_HEADERS,
+      credentials: 'include'
     });
   }
 }
