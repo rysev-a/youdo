@@ -29,7 +29,8 @@ function errors(state = defaultState(), action) {
       return Object.assign({}, state, action.payload);
 
     case constants.UPDATE_REGISTER_FORM:
-      return state;
+      let {field} = action.payload;
+      return Object.assign({}, state, {[field]: ''});
 
     default:
       return state;

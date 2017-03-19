@@ -3,6 +3,7 @@ from .database import db
 from .bcrypt import bcrypt
 from .authorization import login_manager
 from .api import api
+from .migrate import migrate
 
 
 def create_app(settings):
@@ -12,5 +13,6 @@ def create_app(settings):
     bcrypt.init_app(app)
     login_manager.init_app(app)
     api.init_app(app)
+    migrate.init_app(app, db)
     
     return app

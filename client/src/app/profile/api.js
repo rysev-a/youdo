@@ -23,12 +23,12 @@ const api = {
   },
 
   register: (profile)=> {
-    return fetch(`${API_URL}/profile/register`), {
+    return fetch(`${API_URL}/profile/register`, {
       method: 'post',
       headers: API_HEADERS,
       credentials: 'include',
       body: JSON.stringify(profile)
-    }
+    });
   },
 
   current: ()=> {

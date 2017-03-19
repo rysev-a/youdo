@@ -1,0 +1,16 @@
+from ..api import api
+from .resources import (
+    UserList,
+    UserItem,
+    ProfileLogin,
+    ProfileCurrent,
+    ProfileRegister
+)
+
+# User API
+api.add_resource(UserList, '/api/v1/users')
+api.add_resource(UserItem, '/api/v1/users/<int:id>')
+# Profile API
+api.add_resource(ProfileLogin, '/api/v1/profile/login')
+api.add_resource(ProfileCurrent, '/api/v1/profile/current')
+api.add_resource(ProfileRegister, '/api/v1/profile/register')

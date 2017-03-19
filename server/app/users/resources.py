@@ -1,3 +1,4 @@
+from flask import jsonify
 from flask_restful import (Resource, marshal,
                            fields, request, reqparse)
 from flask_login import current_user, login_user, logout_user
@@ -19,7 +20,6 @@ class UserList(Resource):
         parser.add_argument('page', type=int)
         args = parser.parse_args()
         users = User.query.paginate(args.get('page'), 10)
-        print(dir(User.query.paginate(args.get('page'), 10)))
         return {
             'list': marshal(users.items, user_fields),
             'page': users.page,
