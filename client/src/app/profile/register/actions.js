@@ -8,6 +8,12 @@ let actions = {
     payload: {field, value}
   }},
 
+  reset: ()=> {
+    return {
+      type: constants.RESET_REGISTER_FORM
+    }
+  },
+
   submit: function (data) {
     let successCallback = this.submitSuccess;
     let errorCallback = this.submitError;

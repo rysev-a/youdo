@@ -15,6 +15,7 @@ class RegisterView extends FormTemplate {
           <div className="card-content">
             <FormItem placeholder='Электронная почта'
                       error={this.getError('email')}
+                      autoFocus={true}
                       icon='email'
                       onChange={this.update.bind(this, 'email')}
                       type='email'/>

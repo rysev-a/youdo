@@ -4,7 +4,6 @@ import {Component} from 'react';
 import ReactDOM from 'react-dom'
 import {BrowserRouter as Router, Route, NavLink, Switch} from 'react-router-dom';
 import {getErrorText} from 'app/core/helpers/localization';
-import FormItem from '../components/form-item';
 
 
 class FormTemplate extends Component {
@@ -17,6 +16,10 @@ class FormTemplate extends Component {
 
   componentDidMount() {
     setTimeout(()=> this.setState({'visible': true}), 100);
+  }
+
+  componentWillUnmount() {
+    this.props.reset();
   }
 
   formControlCss (field) {
@@ -41,8 +44,14 @@ class FormTemplate extends Component {
     this.props.update(field, e.target.value);
   }
 
-  submit(profile) {
+  submit() {
     this.props.submit(this.props.formData.fields);
+  }
+
+  onKeyDown(e) {
+    if (e.keyCode === 13) {
+     this.submit();
+    }
   }
 }
 

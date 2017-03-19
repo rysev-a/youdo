@@ -12,7 +12,7 @@ function current(state=defaultState(), action) {
       return defaultState();
 
     case constants.SUBMIT_LOGIN_FORM_SUCCESS:
-    case constants.SUBMIT_REGISTRATION_FORM_SUCCESS:
+    case constants.SUBMIT_REGISTER_FORM_SUCCESS:
     case constants.SUBMIT_PROFILE_FORM_SUCCESS:
     case constants.FETCH_CURRENT_USER_SUCCESS:
       return action.payload;

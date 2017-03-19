@@ -18,6 +18,10 @@ function fields(state = defaultState(), action) {
       let {field, value} = action.payload;
       return Object.assign({}, state, {[field]: value});
 
+    case constants.SUBMIT_REGISTER_FORM_SUCCESS:
+    case constants.RESET_REGISTER_FORM:
+      return defaultState();
+
     default:
       return state;
   }
@@ -31,6 +35,10 @@ function errors(state = defaultState(), action) {
     case constants.UPDATE_REGISTER_FORM:
       let {field} = action.payload;
       return Object.assign({}, state, {[field]: ''});
+
+    case constants.SUBMIT_REGISTER_FORM_SUCCESS:
+    case constants.RESET_REGISTER_FORM:
+      return defaultState();
 
     default:
       return state;

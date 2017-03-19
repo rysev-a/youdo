@@ -8,13 +8,15 @@ import FormItem from '../components/form-item';
 class LoginView extends FormTemplate {
   render() {
     return (
-      <div className="container">
+      <div className="container"
+           onKeyDown={this.onKeyDown.bind(this)}>
         <div className={this.formCss('card login-card')}>
           <div className="card-header">
             <div className="card-title">Введите данные</div>
           </div>
           <div className="card-content">
             <FormItem placeholder='Электронная почта'
+                      autoFocus={true}
                       error={this.getError('email')}
                       icon='email'
                       onChange={this.update.bind(this, 'email')}

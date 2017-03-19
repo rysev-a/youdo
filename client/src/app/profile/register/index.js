@@ -16,6 +16,9 @@ let mapDispatchToProps = (dispatch)=> {
     },
     submit: (formData)=> {
       dispatch(actions.submit(formData));
+    },
+    reset: ()=> {
+      dispatch(actions.reset());
     }
   }
 };
