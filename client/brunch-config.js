@@ -8,7 +8,7 @@ module.exports = {
   },
   modules: {
     autoRequire: {
-      'app.js': ['app/index']
+      'app.js': ['app']
     },
     nameCleaner: (path) => path.replace(/^src\//, '')
   },

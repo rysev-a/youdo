@@ -6,7 +6,7 @@ import {Route, Switch} from 'react-router-dom';
 class MapView extends Component {
   render () {
     return (
-      <div className="container">map</div>
+      <div className="container">map 3</div>
     );
   }
 }
