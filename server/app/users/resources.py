@@ -69,10 +69,10 @@ class ProfileLogin(Resource):
 
         user = User.query.filter_by(email=email).first()
         if not user:
-            return {'status': 'not found'}, 400
+            return {'email': 'Еmail not found.'}, 400
 
         if not bcrypt.check_password_hash(user.password, password):
-            return {'status': 'invalid password'}, 400
+            return {'password': 'Invalid password.'}, 400
 
         login_user(user)
         return marshal(user, profile_fields)

@@ -1,4 +1,4 @@
-import {browserHistory} from 'react-router-dom';
+import {push} from 'react-router-redux';
 import constants from 'app/bootstrap/constants';
 import api from '../api';
 
@@ -12,6 +12,7 @@ let actions = {
   submit: function (data) {
     let successCallback = this.submitSuccess;
     let errorCallback = this.submitError;
+
 
     return (dispatch)=> {
       dispatch({type: constants.SUBMIT_LOGIN_FORM});
@@ -28,11 +29,14 @@ let actions = {
   },
 
   success: (dispatch, response) => {
-    response.json().then((json)=>
-      dispatch({               
-        type: constants.SUBMIT_LOGIN_FORM_SUCCESS,
-        payload: json
-      })
+    response.json().then((json)=> {
+        dispatch({               
+          type: constants.SUBMIT_LOGIN_FORM_SUCCESS,
+          payload: json
+        });
+
+        dispatch(push('/'));
+      }
     );
   },
 

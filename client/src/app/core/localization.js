@@ -10,7 +10,9 @@ const translateError = (errorContent)=> {
 
   let errors = {
     'This field is required.': 'Необходимо заполнить данное поле',
-    'Already exists.': 'Данное значение уже занято'
+    'Already exists.': 'Данное значение уже занято',
+    'Еmail not found.': 'Пользователь с таким email не найден',
+    'Invalid password.': 'Неверный пароль'
   }
 
   return errors[errorContent] || errorContent;

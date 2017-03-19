@@ -20,7 +20,9 @@ function errors(state = {email: '', password: ''}, action) {
       return Object.assign({}, state, action.payload);
 
     case constants.UPDATE_LOGIN_FORM:
-      return state;
+      let {field} = action.payload;
+      return Object.assign({}, state, {[field]: ''});
+
 
     default:
       return state;
@@ -28,3 +30,4 @@ function errors(state = {email: '', password: ''}, action) {
 }
 
 export default combineReducers({fields, errors});
+
