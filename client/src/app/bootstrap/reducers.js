@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux';
-import constants from 'app/core/constants';
+import constants from './constants';
+import profile from 'app/profile/reducers';
 
 
 let defaultState = ()=> {
@@ -20,4 +21,4 @@ function app (state = defaultState(), action) {
 }
 
 
-export default combineReducers({app})
+export default combineReducers({app, profile})

@@ -4,25 +4,42 @@ import ReactDOM from 'react-dom'
 import {BrowserRouter as Router, Route, NavLink, Switch} from 'react-router-dom';
 
 
-const navbarItem = (title, path)=> {
-  return <NavLink className="navbar__links-item"
-                  activeClassName="active" to={path}>
-                  {title}</NavLink>;
-}
-
 class Navbar extends Component {
   render() {
     return <nav className="navbar">
       <div className="container">
         <NavLink to='/' className="navbar__logo">YouDo Service</NavLink>
         <div className="navbar__links">
-          {navbarItem('Добавить задачу', '/tasks')}
+          <NavLink className="navbar__links-item"
+                  activeClassName="active" to='/profile/login'>
+                  <i className="material-icons">fingerprint</i>
+                  <span>Войти</span>
+          </NavLink>
+          <NavLink className="navbar__links-item"
+                  activeClassName="active" to='/profile/register'>
+                  <i className="material-icons">person_add</i>
+                  <span>Зарегистрироваться</span>
+          </NavLink>
+
+          <NavLink className="navbar__links-item"
+                  activeClassName="active" to='/tasks/add'>
+                  <i className="material-icons">add_circle</i>
+                  <span>Добавить задачу</span>
+          </NavLink>
+
+          <NavLink className="navbar__links-item"
+                  activeClassName="active" to='/tasks/find'>
+                  <i className="material-icons">search</i>
+                  <span>Найти задачу</span>
+          </NavLink>
+
           <ProfileDropdown/>
         </div>
       </div>
     </nav>;
   }
 }
+
 
 class ProfileDropdown extends Component {
   constructor(props) {

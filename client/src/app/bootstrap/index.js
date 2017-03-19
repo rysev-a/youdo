@@ -2,10 +2,14 @@ import React from 'react';
 import {Component} from 'react';
 import {render} from 'react-dom';
 import {BrowserRouter as Router, Route, NavLink, Switch} from 'react-router-dom';
-import view from 'app/core/view';
-import tasks from 'app/tasks';
-import Navbar from 'app/core/components/navbar';
+import login from 'app/profile/login';
+import register from 'app/profile/register';
 
+import view from './view';
+import Navbar from 'app/navbar';
+
+import tasks from 'app/tasks';
+import profile from 'app/profile';
 
 class App extends Component {
   render() {
@@ -15,7 +19,8 @@ class App extends Component {
           <Navbar/>
           <Switch>
             <Route exact={true} path='/' component={view}/>
-            <Route path='/tasks' component={tasks}/>
+            {tasks}
+            {profile}
           </Switch>
         </main>
       </Router>

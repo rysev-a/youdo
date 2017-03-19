@@ -8,7 +8,7 @@ navbar-link()
   margin 10px 0 0
   display inline-block
   padding 10px 15px
-  transition background ease-in-out 0.3s
+  transition all ease-in-out 0.3s
   cursor pointer
   
 
@@ -30,6 +30,10 @@ navbar-link()
     
     &-item
       navbar-link()
+      .material-icons
+        position relative
+        top 6px
+        right 5px
 
     &-item&-profile
       color #fff
@@ -38,10 +42,6 @@ navbar-link()
       .caret
         margin-left 5px
 
-      .material-icons
-        position relative
-        top 6px
-        right 5px
 
     .dropdown
       display inline-block
@@ -71,8 +71,7 @@ navbar-link()
           padding 10px 20px
           margin 0 5px
           border-radius 2px
-          transition background 150ms linear
-          transition color 150ms linear
+          transition all 0.15s linear
           cursor pointer
           
           &:hover
