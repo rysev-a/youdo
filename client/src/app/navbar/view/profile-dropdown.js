@@ -35,7 +35,12 @@ class ProfileDropdown extends Component {
           <div className="caret"></div>
         </a>
         <div className="dropdown-menu" onClick={this.toggleDropdown.bind(this)}>
-          <a className="dropdown-menu__item">Настройка</a>
+          <NavLink className="dropdown-menu__item" to="/profile/settings">
+            Настройка
+          </NavLink>
+          <NavLink className="dropdown-menu__item" to="/profile/edit">
+            Редактировать
+          </NavLink>
           <a className="dropdown-menu__item"
              onClick={this.props.logout}>Выйти</a>
         </div>

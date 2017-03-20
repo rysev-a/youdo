@@ -7,5 +7,6 @@ from .models import User
 
 
 class UserForm(ModelForm):
-    email = StringField('email', validators=[DataRequired(), Unique(User.email)])
-    password = StringField('pasword', validators=[DataRequired()])
+    email = StringField(validators=[DataRequired(), Unique(User.email)])
+    first_name = StringField(validators=[DataRequired()])
+    password = StringField(validators=[DataRequired()])

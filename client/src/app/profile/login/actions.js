@@ -1,5 +1,6 @@
 import {push} from 'react-router-redux';
 import constants from 'app/bootstrap/constants';
+import requestAction from 'app/core/helpers/request-action';
 import api from '../api';
 
 
@@ -16,43 +17,12 @@ let actions = {
   },
 
   submit: function (data) {
-    let successCallback = this.submitSuccess;
-    let errorCallback = this.submitError;
-
-
-    return (dispatch)=> {
-      dispatch({type: constants.SUBMIT_LOGIN_FORM});
-      api.login(data)
-        .then((response)=> {
-          if (response.ok) {
-            this.success(dispatch, response);
-          }
-          else {
-            this.error(dispatch, response);
-          }
-        });
-    }
-  },
-
-  success: (dispatch, response) => {
-    response.json().then((json)=> {
-        dispatch({               
-          type: constants.SUBMIT_LOGIN_FORM_SUCCESS,
-          payload: json
-        });
-
-        dispatch(push('/'));
-      }
-    );
-  },
-
-  error: (dispatch, response) => {
-    response.json().then((json)=>
-      dispatch({               
-        type: constants.SUBMIT_LOGIN_FORM_ERROR,
-        payload: json
-      })
-    );
+    return requestAction(api.login(data), {
+      request: constants.SUBMIT_LOGIN_FORM,
+      success: constants.SUBMIT_LOGIN_FORM_SUCCESS,
+      error: constants.SUBMIT_LOGIN_FORM_ERROR,
+      complete: push('/')
+    });
   }
 }
 

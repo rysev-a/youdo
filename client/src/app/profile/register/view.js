@@ -7,7 +7,7 @@ import FormItem from '../components/form-item';
 class RegisterView extends FormTemplate {
   render() {
     return (
-      <div className="container">
+      <div className="container" onKeyDown={this.onKeyDown.bind(this)}>
         <div className={this.formCss('card register-card')}>
           <div className="card-header">
             <div className="card-title">Введите данные</div>

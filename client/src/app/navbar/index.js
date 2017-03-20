@@ -4,7 +4,7 @@ import actions from 'app/profile/current/actions';
 
 
 let mapStateToProps = (state) => {
-  return {currentUser: state.profile.current}
+  return {currentUser: state.profile.current.data}
 }
 
 let mapDispatchToProps = (dispatch) => {

@@ -1,10 +1,12 @@
 import loginConstants from './login/constants';
 import registerConstants from './register/constants';
-import currentUserConstants from './current/constants';
+import currentConstants from './current/constants';
+import editConstants from './edit/constants';
 
 
 export default Object.assign(
   loginConstants,
   registerConstants,
-  currentUserConstants
+  currentConstants,
+  editConstants
 );

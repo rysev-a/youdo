@@ -11,12 +11,16 @@ from .forms import UserForm
 
 user_fields = {
     'id': fields.Integer,
-    'email': fields.String
+    'email': fields.String,
+    'first_name': fields.String,
+    'last_name': fields.String
 }
 
 profile_fields = {
     'id': fields.Integer,
     'email': fields.String,
+    'first_name': fields.String,
+    'last_name': fields.String,
     'is_authenticated': fields.Boolean
 }
 
@@ -109,3 +113,11 @@ class ProfileRegister(Resource):
 
         return marshal(user, profile_fields), 200
 
+
+class ProfileEdit(Resource):
+    def post(self):
+        print(current_user.first_name)
+        user = User.query.filter_by(id=current_user.id)
+        user.update(request.json)
+        db.session.commit()
+        return marshal(current_user, user_fields)

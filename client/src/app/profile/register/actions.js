@@ -1,4 +1,6 @@
+import {push} from 'react-router-redux';
 import constants from 'app/bootstrap/constants';
+import requestAction from 'app/core/helpers/request-action';
 import api from '../api';
 
 
@@ -15,39 +17,12 @@ let actions = {
   },
 
   submit: function (data) {
-    let successCallback = this.submitSuccess;
-    let errorCallback = this.submitError;
-
-    return (dispatch)=> {
-      dispatch({type: constants.SUBMIT_REGISTER_FORM});
-      api.register(data)
-        .then((response)=> {
-          if (response.ok) {
-            this.success(dispatch, response);
-          }
-          else {
-            this.error(dispatch, response);
-          }
-        });
-    }
-  },
-
-  success: (dispatch, response) => {
-    response.json().then((json)=>
-      dispatch({               
-        type: constants.SUBMIT_REGISTER_FORM_SUCCESS,
-        payload: json
-      })
-    );
-  },
-
-  error: (dispatch, response) => {
-    response.json().then((json)=>
-      dispatch({               
-        type: constants.SUBMIT_REGISTER_FORM_ERROR,
-        payload: json
-      })
-    );
+    return requestAction(api.register(data), {
+      request: constants.SUBMIT_REGISTER_FORM,
+      success: constants.SUBMIT_REGISTER_FORM_SUCCESS,
+      error: constants.SUBMIT_REGISTER_FORM_ERROR,
+      complete: push('/')
+    });
   }
 }
 

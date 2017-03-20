@@ -4,6 +4,8 @@ from ..bcrypt import bcrypt
 
 
 class User(db.Model):
+    __tablename__ = 'users'
+
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(length=100))
     last_name = db.Column(db.String(length=100))

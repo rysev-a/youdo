@@ -1,4 +1,5 @@
 import settings from 'app/settings';
+import {editSerializer} from './serializers';
 
 
 const {API_URL, API_HEADERS} = settings;
@@ -37,6 +38,15 @@ const api = {
       headers: API_HEADERS,
       credentials: 'include'
     });
+  },
+
+  edit: (profile)=> {
+    return fetch(`${API_URL}/profile/edit`, {
+      method: 'post',
+      headers: API_HEADERS,
+      credentials: 'include',
+      body: JSON.stringify(editSerializer(profile))
+    })
   }
 }
 

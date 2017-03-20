@@ -10,16 +10,25 @@ class FormItem extends Component {
     }
   }
 
+  formIcon () {
+    if (this.props.icon) {
+      return (
+        <span className="form-item__icon">
+          <i className="material-icons">{this.props.icon}</i>
+        </span>
+      );
+    }
+  }
+
   render () {
-    let {type, placeholder, onChange, error, icon, autoFocus} = this.props;
+    let {type, placeholder, onChange, error, autoFocus, defaultValue} = this.props;
     return (
       <div className={classNames({'form-item': true, 'error': error})}>
-        <span className="form-item__icon">
-          <i className="material-icons">{icon}</i>
-        </span>
+        {this.formIcon()}
         <div className="form-error">{error}</div>
         <input className={classNames({'form-control': true, 'error': error})}
                ref={input=> {this.textInput = input;}}
+               defaultValue={defaultValue}
                type={type} placeholder={placeholder}
                onChange={onChange}/>
       </div>

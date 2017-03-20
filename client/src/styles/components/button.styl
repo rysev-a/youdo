@@ -1,14 +1,26 @@
 @import '../variables'
 
+buttonColor(color)
+  background color
+  box-shadow 0 2px 2px 0 rgba(color, 0.14), 0 3px 1px -2px rgba(color, 0.2), 0 1px 5px 0 rgba(color, 0.12)
+  &:hover
+    box-shadow 0 14px 26px -12px rgba(color, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(color, 0.2)
+
+
 .button
-  box-shadow 0 2px 2px 0 rgba(156, 39, 176, 0.14), 0 3px 1px -2px rgba(156, 39, 176, 0.2), 0 1px 5px 0 rgba(156, 39, 176, 0.12)
   background mainColor
   display inline-block
   color #fff
   padding 10px 20px
-  border-radius 40px
+  border-radius 3px
   cursor pointer
   transition box-shadow ease-in-out 0.3s
+    
+  &.button-primary
+    buttonColor(mainColor)
   
-  &:hover
-    box-shadow 0 14px 26px -12px rgba(mainColor, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(mainColor, 0.2)
+  &.button-success
+    buttonColor(successColor)
+  
+  &.button-danger
+    buttonColor(dangerColor)
