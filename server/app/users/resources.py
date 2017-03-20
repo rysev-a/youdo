@@ -5,7 +5,7 @@ from flask_login import current_user, login_user, logout_user
 from ..bcrypt import bcrypt
 from ..database import db
 from .models import User
-from .forms import UserForm
+from .forms import UserForm, ProfileForm
 
 
 
@@ -116,8 +116,13 @@ class ProfileRegister(Resource):
 
 class ProfileEdit(Resource):
     def post(self):
-        print(current_user.first_name)
-        user = User.query.filter_by(id=current_user.id)
-        user.update(request.json)
-        db.session.commit()
-        return marshal(current_user, user_fields)
+        if request.json['email'] != current_user.email:
+            form = ProfileForm(**request.json)
+            if not form.validate():
+                response = jsonify(form.errors)
+                response.status_code = 400
+                return response
+
+        User.query.filter_by(id=current_user.id).update(request.json)
+        db.session.commit()                
+        return marshal(current_user, profile_fields), 200

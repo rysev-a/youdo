@@ -6,7 +6,7 @@ class ProfileSettings extends Component {
   render() {
     return (
       <div className="container">
-        Настройки
+        <h2>Настройки</h2>
       </div>
     );
   }
