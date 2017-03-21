@@ -1,4 +1,4 @@
-import constants from 'app/bootstrap/constants';
+import constants from 'app/constants';
 import Immutable from 'immutable';
 import {combineReducers} from 'redux';
 

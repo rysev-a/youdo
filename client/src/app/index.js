@@ -1,18 +1,28 @@
 import React from 'react';
 import {render} from 'react-dom';
+import {Router, Route, browserHistory} from 'react-router';
 import {Provider} from 'react-redux';
-import {ConnectedRouter} from 'react-router-redux'
-
 import store from 'app/core/store';
-import browserHistory from 'app/core/browser-history';
-import App from 'app/bootstrap';
 
+import Navbar from 'app/navbar';
+import profile from 'app/profile';
+import tasks from 'app/tasks';
+import actions from 'app/profile/current/actions';
+store.dispatch(actions.fetch());
 
 render(
   <Provider store={store}>
-    <ConnectedRouter history={browserHistory}>
-      <App/>
-    </ConnectedRouter>
+    <Router history={browserHistory}>
+      <Route path="/" component={(props)=> (
+          <main>
+            <Navbar/>
+            {props.children}
+          </main>
+        )}>
+        {profile}
+        {tasks}
+      </Route>
+    </Router>
   </Provider>,
   document.getElementById('app')
 );

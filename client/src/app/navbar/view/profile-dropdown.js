@@ -1,7 +1,7 @@
 import React from 'react';
 import {Component} from 'react';
 import ReactDOM from 'react-dom'
-import {NavLink} from 'react-router-dom';
+import {Link} from 'react-router';
 
 
 class ProfileDropdown extends Component {
@@ -35,12 +35,12 @@ class ProfileDropdown extends Component {
           <div className="caret"></div>
         </a>
         <div className="dropdown-menu" onClick={this.toggleDropdown.bind(this)}>
-          <NavLink className="dropdown-menu__item" to="/profile/settings">
+          <Link className="dropdown-menu__item" to="/profile/settings">
             Настройки
-          </NavLink>
-          <NavLink className="dropdown-menu__item" to="/profile/edit">
+          </Link>
+          <Link className="dropdown-menu__item" to="/profile/edit">
             Редактировать
-          </NavLink>
+          </Link>
           <a className="dropdown-menu__item"
              onClick={this.props.logout}>Выйти</a>
         </div>

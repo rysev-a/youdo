@@ -1,5 +1,5 @@
-const requestAction = (promise, types) => {
-  let {request, success, error, complete} = types;
+const requestAction = (promise, types, complete) => {
+  let {request, success, error} = types;
 
   return (dispatch)=> {
     dispatch({type: request});
@@ -15,7 +15,7 @@ const requestAction = (promise, types) => {
 
         // start complete dispatch
         if (response.ok && complete) {
-          dispatch(complete);
+          complete();
         }
       })
     });

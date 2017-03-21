@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import constants from 'app/bootstrap/constants';
+import constants from 'app/constants';
 
 
 let defaultState = ()=> {

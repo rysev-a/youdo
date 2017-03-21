@@ -1,6 +1,6 @@
-import {push} from 'react-router-redux';
+import {browserHistory} from 'react-router';
 import requestAction from 'app/core/helpers/request-action';
-import constants from 'app/bootstrap/constants';
+import constants from 'app/constants';
 import api from '../api';
 
 
@@ -28,8 +28,7 @@ let actions = {
       request: constants.SUBMIT_PROFILE_FORM,
       success: constants.SUBMIT_PROFILE_FORM_SUCCESS,
       error: constants.SUBMIT_PROFILE_FORM_ERROR,
-      complete: push('/')
-    });
+    }, ()=> browserHistory.push('/'));
   }
 }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Component} from 'react';
 import ReactDOM from 'react-dom'
-import {NavLink} from 'react-router-dom';
+import {IndexLink, Link} from 'react-router';
 import NavbarItem from './navbar-item';
 import ProfileDropdown from './profile-dropdown';
 
@@ -13,7 +13,7 @@ class Navbar extends Component {
 
     return <nav className="navbar">
       <div className="container">
-        <NavLink to='/' className="navbar__logo">YouDo Service</NavLink>
+        <Link to='/' className="navbar__logo">YouDo Service</Link>
         <div className="navbar__links">
           {links()}
         </div>
@@ -27,11 +27,11 @@ class Navbar extends Component {
         <NavbarItem title='Добавить задачу' 
                  icon='add_cicle'
                  to='/tasks/add' />
-        <NavLink className="navbar__links-item"
+        <Link className="navbar__links-item"
                 activeClassName="active" to='/tasks/find'>
                 <i className="material-icons">search</i>
                 <span>Найти задачу</span>
-        </NavLink>
+        </Link>
         <ProfileDropdown logout={this.props.logout}/>
       </div>
     );
