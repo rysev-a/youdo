@@ -26,10 +26,3 @@ class TaskCategory(db.Model):
     def __str__(self):
         return self.title
 
-
-class Offer(db.Model):
-    __tablename__ = 'offers'
-
-    price = db.Column(db.Integer, default=0)
-    task_id = db.Column(db.Integer, db.ForeignKey('tasks.id'))
-    task = relationship("Task")

@@ -12,6 +12,11 @@ user_fields = {
     'first_name': fields.String
 }
 
+task_category_fields = {
+    'id': fields.Integer,
+    'title': fields.String
+}
+
 task_fields = {
     'id': fields.Integer,
     'price': fields.Integer,
@@ -20,11 +25,9 @@ task_fields = {
     'status': fields.String,
     'customer_id': fields.String,
     'executor_id': fields.String,
-    'category': fields.Nested({
-            'id': fields.Integer,
-            'name': fields.String
-        })
+    'category': fields.Nested(task_category_fields)
 }
+
 
 
 #Tasks API

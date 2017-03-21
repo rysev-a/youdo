@@ -19,5 +19,3 @@ api.add_resource(ProfileCurrent, '/api/v1/profile/current')
 api.add_resource(ProfileRegister, '/api/v1/profile/register')
 api.add_resource(ProfileLogout, '/api/v1/profile/logout')
 api.add_resource(ProfileEdit, '/api/v1/profile/edit')
-
-print('init users')
