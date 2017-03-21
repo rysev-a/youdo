@@ -1,4 +1,5 @@
 from sqlalchemy.ext.hybrid import hybrid_property
+from sqlalchemy.orm import relationship
 from ..database import db
 from ..bcrypt import bcrypt
 
@@ -11,6 +12,11 @@ class User(db.Model):
     last_name = db.Column(db.String(length=100))
     email = db.Column(db.String(length=100), unique=True)
     _password = db.Column('password', db.String(255))
+    created_tasks = relationship("Task", 
+            primaryjoin="User.id==Task.customer_id")
+    executed_tasks = relationship("Task", 
+            primaryjoin="User.id==Task.executor_id")
+
 
     @hybrid_property
     def password(self):

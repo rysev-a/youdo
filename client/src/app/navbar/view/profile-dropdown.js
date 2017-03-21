@@ -36,7 +36,7 @@ class ProfileDropdown extends Component {
         </a>
         <div className="dropdown-menu" onClick={this.toggleDropdown.bind(this)}>
           <NavLink className="dropdown-menu__item" to="/profile/settings">
-            Настройка
+            Настройки
           </NavLink>
           <NavLink className="dropdown-menu__item" to="/profile/edit">
             Редактировать

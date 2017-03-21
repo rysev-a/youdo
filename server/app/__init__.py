@@ -5,6 +5,8 @@ from .authorization import login_manager
 from .api import api
 from .migrate import migrate
 
+# import app modules
+from app import users, tasks
 
 def create_app(settings):
     app = Flask(__name__)
