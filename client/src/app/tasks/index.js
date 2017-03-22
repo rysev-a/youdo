@@ -3,13 +3,13 @@ import {Component} from 'react';
 import {render} from 'react-dom';
 import {Route} from 'react-router';
 
-import FindTask from 'app/tasks/find';
-import AddTask from 'app/tasks/add';
+import TaskList from 'app/tasks/list';
+import TaskCreate from 'app/tasks/create';
+
 
 const tasks = <Route path='/tasks'>
   <Route path="tasks">
-    <Route path="/tasks/find" component={FindTask}/>
-    <Route path="/tasks/add" component={AddTask}/>
+    <Route path="/tasks/list" component={TaskList}/>
   </Route>
 </Route>;
 

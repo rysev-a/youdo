@@ -1,3 +1,4 @@
+import math
 from flask_restful import Resource, reqparse, fields, marshal
 from flask import request, jsonify, json
 
@@ -29,12 +30,27 @@ task_fields = {
 }
 
 
-
 #Tasks API
 class TaskList(Resource):
     def get(self):
-        tasks = Task.query.all()
-        return marshal(tasks, task_fields)
+        per_page = 10
+        task_count = Task.query.count()
+        page_count = math.ceil(task_count / per_page)
+        print(page_count)
+
+        parser = reqparse.RequestParser()
+        parser.add_argument('page', type=int)
+        args = parser.parse_args()
+        page = args.get('page')
+        if page:
+            tasks = Task.query.limit(per_page).offset((page - 1) * per_page).all()
+        else:
+            tasks = Task.query.all()
+        return {
+            'data': marshal(tasks, task_fields),
+            'page': page,
+            'page_count': page_count
+        }, 200
 
     def post(self):
         data = request.json

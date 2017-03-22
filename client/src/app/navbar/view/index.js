@@ -24,14 +24,12 @@ class Navbar extends Component {
   profileLinks () {
     return (
       <div className="profile-links">
-        <NavbarItem title='Добавить задачу' 
-                 icon='add_cicle'
-                 to='/tasks/add' />
-        <Link className="navbar__links-item"
-                activeClassName="active" to='/tasks/find'>
-                <i className="material-icons">search</i>
-                <span>Найти задачу</span>
-        </Link>
+        <NavbarItem title="Добавить задачу" 
+                 icon="add_cicle"
+                 to="/tasks/create" />
+        <NavbarItem title="Найти задачу"
+                icon="search"
+                to="/tasks/list" />
         <ProfileDropdown logout={this.props.logout}/>
       </div>
     );

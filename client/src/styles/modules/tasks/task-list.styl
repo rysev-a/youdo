@@ -1,0 +1,73 @@
+@import '../../variables.styl'
+.task-list
+  padding 50px 0 0
+  background #fff
+  min-height 500px
+
+  .task-list__item
+    margin 0 0 20px
+    padding-bottom 10px
+    border-bottom 1px solid rgba(defaultColor, 0.3)
+    &-title
+      display block
+      font-size 24px
+      padding 0 0 15px
+
+    &-description
+      font-size 14px
+      padding 0 0 15px
+      
+    &-info
+      text-align right
+      
+      &__item
+        padding-left 10px
+
+.task-list__filter
+  .filter-item
+    select
+      width 50%
+      cursor pointer
+
+    .radio
+      display inline-block
+
+.filter-sort
+  .radio
+    &:nth-child(2)
+      position relative
+      left -10px
+
+.task-list__pagination
+  margin 20px 0
+
+  &__item
+    display inline-block
+    color #999
+    border-radius 30px
+    margin 0 3px
+    height 30px
+    min-width 30px
+    line-height 30px
+    font-weight 400
+    font-size 12px
+    text-transform uppercase
+    background transparent
+    text-align center
+    transition all ease-in-out 0.3s
+    cursor pointer
+    
+
+    &:hover
+      background-color: #eee;
+      border-color: #ddd;
+
+    &.next
+    &.prev
+      padding 0 11px
+      
+    &.active
+      background-color mainColor
+      border-color mainColor
+      color #fff
+      box-shadow: 0 4px 5px 0 rgba(mainColor, 0.14), 0 1px 10px 0 rgba(mainColor, 0.12), 0 2px 4px -1px rgba(mainColor, 0.2)
