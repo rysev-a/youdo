@@ -11,4 +11,4 @@ api.add_resource(TaskItem, '/api/v1/tasks/<int:id>')
 
 
 # TaskCategory API
-api.add_resource(TaskCategoryList, '/api/v1/task-categories')
+api.add_resource(TaskCategoryList, '/api/v1/tasks/categories')

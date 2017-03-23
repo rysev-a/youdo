@@ -18,7 +18,7 @@ let defaultStatus = ()=> {
     page: 1,
     page_count: 0
   }
-}
+};
 
 function status (state=defaultStatus(), action) {
   switch (action.type) {
@@ -27,11 +27,11 @@ function status (state=defaultStatus(), action) {
         loaded: true,
         page: action.payload.page,
         page_count: action.payload.page_count
-      }
+      };
 
     default:
       return state;
   }
-}
+};
 
 export default combineReducers({data, status})
