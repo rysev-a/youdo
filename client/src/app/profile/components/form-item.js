@@ -23,7 +23,7 @@ class FormItem extends Component {
   render () {
     let {type, placeholder, onChange, error, autoFocus, defaultValue} = this.props;
     return (
-      <div className={classNames({'form-item': true, 'error': error})}>
+      <div className={classNames({'form-item': true, 'is-error': error})}>
         {this.formIcon()}
         <div className="form-error">{error}</div>
         <input className={classNames({'form-control': true, 'error': error})}
