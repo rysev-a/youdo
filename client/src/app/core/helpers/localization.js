@@ -4,7 +4,7 @@ const unpackError = (errorData)=> {
   }
 
   return errorData;
-}
+};
 
 const translateError = (errorContent)=> {
 
@@ -12,12 +12,13 @@ const translateError = (errorContent)=> {
     'This field is required.': 'Необходимо заполнить данное поле',
     'Already exists.': 'Данное значение уже занято',
     'Еmail not found.': 'Пользователь с таким email не найден',
-    'Invalid password.': 'Неверный пароль'
-  }
+    'Invalid password.': 'Неверный пароль',
+    'Invalid email address.': 'Неверный формат email'
+  };
 
   return errors[errorContent] || errorContent;
-}
+};
 
 export const getErrorText = (errorData)=> {
   return translateError(unpackError(errorData));
-}
+};
