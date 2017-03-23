@@ -13,14 +13,18 @@ class TaskList extends Component {
       <div className="task-list">
         <div className="container">
           <h2>Задачи</h2>
-          <div className="row">
-            <div className="col-md-3">
-              <Filter {...this.props}/>
-            </div>
-            <div className="col-md-9">
-              <List {...this.props.tasks}/>
-              <Pagination status={this.props.tasks.status}
-                          fetch={this.props.fetch}/>
+          <div className="card">
+            <div className="card-content">
+              <div className="row">
+                <div className="col-md-3">
+                  <Filter {...this.props}/>
+                </div>
+                <div className="col-md-9">
+                  <List {...this.props.tasks}/>
+                  <Pagination status={this.props.tasks.status}
+                              fetch={this.props.fetch}/>
+                </div>
+              </div>
             </div>
           </div>
         </div>
