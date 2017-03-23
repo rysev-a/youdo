@@ -10,6 +10,7 @@ import TaskCreate from 'app/tasks/create';
 const tasks = <Route path='/tasks'>
   <Route path="tasks">
     <Route path="/tasks/list" component={TaskList}/>
+    <Route path="/tasks/create" component={TaskCreate}/>
   </Route>
 </Route>;
 

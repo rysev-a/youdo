@@ -3,13 +3,13 @@ import view from './view';
 import actions from './actions';
 
 
-let mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
   return {
     tasks: state.tasks.list
   };
 };
 
-let mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     fetch: (page) => dispatch(actions.fetch(page))
   }
