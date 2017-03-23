@@ -36,31 +36,34 @@ class TaskCreateForm extends Component {
 
     return (
       <div className="task-create__form">
-        <div className={this.isEmpty('name')}>
+        <div className={this.formItemClassName('name')}>
           <input type="text" className="form-control"
                  onChange={this.update.bind(this, 'name')}  />
           <label className="form-label">Название </label>
         </div>
-        <div className={this.isEmpty('description')}>
+        <div className={this.formItemClassName('description')}>
           <textarea className="form-control"
+                    maxLength="500"
                     onChange={this.update.bind(this, 'description')}>
           </textarea>
           <label className="form-label">Описание</label>
         </div>
 
-        <div className="form-item">
-          <label className="form-label">Катерогия</label>
+        <div className={this.formItemClassName('category_id')}>
           <select className="form-control"
+                  defaultValue="0"
                   onChange={this.update.bind(this, 'category_id')}>
+            <option disabled="disabled" value="0">Выбрать категорию</option> 
             {this.props.categories.map((category)=> (
               <option value={category.id} key={category.id}>
                 {category.title}
               </option>
             ))}
           </select>
+          <label className="form-label">Катерогия</label>
         </div>
 
-        <div className={this.isEmpty('price')}>
+        <div className={this.formItemClassName('price')}>
           <input type="number" className="form-control"
                  onChange={this.update.bind(this, 'price')}/>
           <label className="form-label">Бюджет в рублях</label>
@@ -75,17 +78,18 @@ class TaskCreateForm extends Component {
   }
 
   submit () {
-    console.log(this.props);
+    this.props.submit(this.props.create.data);
   }
 
   update (field, e) {
     this.props.update(field, e.target.value);
   }
 
-  isEmpty (field) {
+  formItemClassName (field) {
     return classNames({
       'form-item': true,
-      'is-empty': !this.props.create.data[field]
+      'is-empty': !this.props.create.data[field],
+      'is-error': this.props.create.errors[field]
     });
   }
 }

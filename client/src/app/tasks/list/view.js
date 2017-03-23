@@ -109,6 +109,10 @@ class Pagination extends Component {
   render () {
     let {loaded, page, page_count} = this.props.status;
 
+    if (page_count < 2) {
+      return <div className="task-list__pagination"></div>;
+    }
+
     return (
       <div className="task-list__pagination">
         <a className="task-list__pagination__item prev"

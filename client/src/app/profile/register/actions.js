@@ -23,6 +23,6 @@ let actions = {
       error: constants.SUBMIT_REGISTER_FORM_ERROR
     }, ()=> browserHistory.push('/'));
   }
-}
+};
 
 export default actions

@@ -9,7 +9,7 @@ const defaultState = ()=> {
     email: '',
     password: ''
   }
-}
+};
 
 
 function fields(state = defaultState(), action) {

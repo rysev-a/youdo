@@ -1,7 +1,7 @@
 @import '../variables'
 
 .form-item
-  margin 20px 0 0
+  margin 15px 0
   padding 7px 0
   position relative
   
@@ -12,10 +12,13 @@
     position absolute
     top 0
 
-  &.error
+  &.is-error
     .form-error
       visibility visible
 
+  &.is-error
+    .form-label
+      color dangerColor
 
 
 .form-label
@@ -28,13 +31,19 @@
   font-size 16px
   color #aaa
 
+select ~ .form-label
 textarea:focus ~ .form-label
 input:focus ~ .form-label
 .form-item:not(.is-empty) .form-label
+.form-item.is-error .form-label
   top -28px
   font-size 11px
   line-height 1
   color mainColor
+
+.form-item.is-error .form-label
+  color dangerColor
+
 
 
 .form-control
@@ -58,16 +67,18 @@ input:focus ~ .form-label
     background-size: 100% 2px, 100% 1px;
     box-shadow: none;
     transition-duration: 0.3s
-    
-  &.error
-    outline: none;
-    background-image: linear-gradient(dangerColor, dangerColor), linear-gradient(#D2D2D2, #D2D2D2);
-    background-size: 100% 2px, 100% 1px;
-    box-shadow: none;
-    transition-duration: 0.3s
+
+.form-item
+  &.is-error
+    .form-control
+      outline: none;
+      background-image: linear-gradient(dangerColor, dangerColor), linear-gradient(#D2D2D2, #D2D2D2);
+      background-size: 100% 2px, 100% 1px;
+      box-shadow: none;
+      transition-duration: 0.3s
 
 .form-buttons
-  margin 10px 0
+  margin 15px 0 5px
   text-align left
 
 .radio

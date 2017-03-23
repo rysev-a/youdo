@@ -2,9 +2,10 @@ import math
 from flask_restful import Resource, reqparse, fields, marshal
 from flask import request, jsonify, json
 
-from .models import Task, TaskCategory
 from ..users.models import User
 from ..database import db
+from .models import Task, TaskCategory
+from .forms import TaskForm
 
 
 user_fields = {
@@ -53,11 +54,18 @@ class TaskList(Resource):
         }, 200
 
     def post(self):
-        data = request.json
-        task = Task(**data)
+        form = TaskForm(**request.json)
+        if not form.validate():
+            response = jsonify(form.errors)
+            response.status_code = 400
+            return response
+
+        task = Task(**request.json)
         db.session.add(task)
         db.session.commit()
         return marshal(task, task_fields)
+
+
 
 
 class TaskItem(Resource):

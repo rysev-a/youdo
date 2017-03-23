@@ -15,6 +15,7 @@ const mapDispatchToProps = (dispatch)=> {
   return {
     update: (field, value)=> dispatch(actions.update(field, value)),
     reset: ()=> dispatch(actions.reset()),
+    submit: (task)=> dispatch(actions.submit(task)),
     fetchCategories: ()=> dispatch(categoryActions.fetch())
   }
 };
