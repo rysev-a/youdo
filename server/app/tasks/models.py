@@ -14,6 +14,7 @@ class Task(db.Model):
     executor_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     executor = db.relationship('User', foreign_keys=[executor_id])
     description = db.Column(db.String(length=500))
+    status = db.Column(db.String(length=10), default='waiting')
     price = db.Column(db.Integer, default=0)
 
 
@@ -25,4 +26,3 @@ class TaskCategory(db.Model):
 
     def __str__(self):
         return self.title
-

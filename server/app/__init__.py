@@ -6,7 +6,7 @@ from .api import api
 from .migrate import migrate
 
 # import app modules
-from app import users, tasks
+from app import users, tasks, offers
 
 def create_app(settings):
     app = Flask(__name__)
