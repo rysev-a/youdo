@@ -1,7 +1,8 @@
-import {combineReducers} from 'redux';
-import constants from 'app/constants';
+import {combineReducers} from 'redux'
+import constants from 'app/constants'
 
-function data (state = [], action) {
+
+function data (state=[], action) {
   switch (action.type) {
     case constants.FETCH_TASK_LIST_SUCCESS:
       return action.payload.data;
@@ -11,8 +12,7 @@ function data (state = [], action) {
   }
 }
 
-
-let defaultStatus = ()=> {
+const defaultStatus = ()=> {
   return {
     loaded: false,
     page: 1,
@@ -32,6 +32,6 @@ function status (state=defaultStatus(), action) {
     default:
       return state;
   }
-};
+}
 
 export default combineReducers({data, status})

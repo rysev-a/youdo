@@ -9,8 +9,12 @@ let api = {
     return fetch(`${baseUrl}?page=${page}`);
   },
 
+  item: (id)=> {
+    return fetch(`${baseUrl}/${id}`)
+  },
+
   add: (task)=> {
-    return fetch(`${API_URL}/tasks`, {
+    return fetch(baseUrl, {
       method: 'post',
       headers: API_HEADERS,
       credentials: 'include',

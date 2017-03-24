@@ -1,7 +1,7 @@
-import {browserHistory} from 'react-router';
-import constants from 'app/constants';
-import requestAction from 'app/core/helpers/request-action';
-import api from '../api';
+import {browserHistory} from 'react-router'
+import constants from 'app/constants'
+import requestAction from 'app/core/helpers/request-action'
+import api from '../api'
 
 
 let actions = {
@@ -23,6 +23,6 @@ let actions = {
       error: constants.SUBMIT_LOGIN_FORM_ERROR,
     }, ()=> browserHistory.push('/'));
   }
-}
+};
 
 export default actions;

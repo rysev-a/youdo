@@ -69,8 +69,8 @@ class TaskList(Resource):
 
 
 class TaskItem(Resource):
-    def get(self, task_id):
-        task = Task.query.get(task_id)
+    def get(self, id):
+        task = Task.query.get(id)
         if not task:
             return {'message': 'not found'}, 400
 

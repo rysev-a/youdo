@@ -8,7 +8,7 @@ const requestAction = (promise, types, complete) => {
       let requestType = response.ok ? success : error;
 
       response.json().then((json)=> {
-        dispatch({               
+        dispatch({
           type: requestType,
           payload: json
         });

@@ -1,6 +1,7 @@
-import classNames from 'classnames';
-import React from 'react';
-import {Component} from 'react';
+import classNames from 'classnames'
+import React from 'react'
+import {Component} from 'react'
+import {Link} from 'react-router'
 
 
 class TaskList extends Component {
@@ -91,7 +92,8 @@ class TaskItem extends Component {
     let task = this.props;
     return (
       <div className="task-list__item" key={task.id}>
-        <a className="task-list__item-title">{task.name}</a>
+        <Link className="task-list__item-title"
+              to={`/tasks/${task.id}`}>{task.name}</Link>
         <div className="task-list__item-description">{task.description}</div>
 
         <div className="task-list__item-info">

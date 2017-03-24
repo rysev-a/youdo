@@ -2,7 +2,7 @@ import React from 'react';
 import {Component} from 'react';
 import FormTemplate from '../components/form-template';
 import FormItem from '../components/form-item';
-import Loader from '../components/loader';
+import Loader from 'app/core/components/loader';
 
 
 class RegisterView extends FormTemplate {

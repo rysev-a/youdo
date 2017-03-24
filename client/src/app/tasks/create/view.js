@@ -1,6 +1,6 @@
-import classNames from 'classnames';
-import React from 'react';
-import {Component} from 'react';
+import classNames from 'classnames'
+import React from 'react'
+import {Component} from 'react'
 
 
 class TaskCreate extends Component {

@@ -2,20 +2,20 @@ import React from 'react';
 import {Component} from 'react';
 
 
-class FindTask extends Component{
+class TableWrapper extends Component{
   render() {
     return <div className="container">
-      <h2>Задачи 2</h2>
+      <h2>Название таблицы</h2>
       <div className="card">
         <div className="card-content">
-          <TaskTable/>
+          <Table/>
         </div>
       </div>
     </div>;
   }
 }
 
-class TaskTable extends Component {
+class Table extends Component {
   render() {
     return (
       <table className="table">
@@ -70,4 +70,4 @@ class TaskTable extends Component {
   }
 }
 
-export default FindTask
+export default TaskWrapper
