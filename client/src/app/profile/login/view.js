@@ -2,7 +2,7 @@ import React from 'react';
 import {Component} from 'react';
 import FormTemplate from '../components/form-template';
 import FormItem from '../components/form-item';
-
+import Loader from '../components/loader';
 
 
 class LoginView extends FormTemplate {
@@ -15,6 +15,9 @@ class LoginView extends FormTemplate {
             <div className="card-title">Введите данные</div>
           </div>
           <div className="card-content">
+            <Loader hidden={!this.props.formData.status.loading}/>
+
+
             <FormItem placeholder='Электронная почта'
                       autoFocus={true}
                       error={this.getError('email')}

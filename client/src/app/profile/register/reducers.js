@@ -45,4 +45,18 @@ function errors(state = defaultState(), action) {
   }
 }
 
-export default combineReducers({fields, errors});
+function status(state={loading: false}, action) {
+  switch (action.type) {
+    case constants.SUBMIT_REGISTER_FORM:
+      return {loading: true};
+
+    case constants.SUBMIT_REGISTER_FORM_SUCCESS:
+    case constants.SUBMIT_REGISTER_FORM_ERROR:
+      return {loading: false};
+
+    default:
+      return state;
+  }
+}
+
+export default combineReducers({fields, errors, status});

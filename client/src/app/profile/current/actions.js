@@ -1,3 +1,4 @@
+import {browserHistory} from 'react-router';
 import constants from 'app/constants';
 import api from '../api';
 
@@ -23,6 +24,7 @@ let actions = {
       api.logout()
         .then((response) => {
           dispatch({type: constants.LOGOUT_CURRENT_USER_SUCCESS});
+          browserHistory.push('/');
         })
     }
   }
