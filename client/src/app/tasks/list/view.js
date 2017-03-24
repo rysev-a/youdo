@@ -91,11 +91,11 @@ class TaskItem extends Component {
   render () {
     let task = this.props;
     return (
-      <div className="task-list__item" key={task.id}>
-        <Link className="task-list__item-title"
-              to={`/tasks/${task.id}`}>{task.name}</Link>
+      <Link className="task-list__item"
+            to={`/tasks/${task.id}`}
+            key={task.id}>
+        <div className="task-list__item-title">{task.name}</div>
         <div className="task-list__item-description">{task.description}</div>
-
         <div className="task-list__item-info">
           <span className="view-count task-list__item-info__item">
             <span className="view-count__title">Просмотров: </span>
@@ -106,7 +106,7 @@ class TaskItem extends Component {
             <span className="offer-count__value">8</span>
           </span>
         </div>
-      </div>
+      </Link>
     );
   }
 }

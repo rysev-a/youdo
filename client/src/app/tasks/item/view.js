@@ -14,14 +14,30 @@ class TaskItem extends Component {
   }
 
   render () {
-    console.log(this.props);
     if (!this.props.task.status.loaded) {
       return <Loader hidden={false}/>
     }
 
+    let {task} = this.props;
+
     return (
       <div className="task-item">
-        task item
+        <div className="container">
+          <h2>{task.data.name}</h2>
+
+          <div className="card">
+            <div className="card-content">
+              <h3>Описание</h3>
+              <div className="task-item__description">
+                {task.data.description}
+              </div>
+              <h3>Бюджет</h3>
+              <div className="task-item__description">
+                {task.data.price}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
