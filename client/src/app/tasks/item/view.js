@@ -3,6 +3,7 @@ import React from 'react'
 import {Component} from 'react'
 import Loader from 'app/core/components/loader'
 import OfferCreate from 'app/offers/create'
+import OfferList from 'app/offers/list'
 
 
 class TaskItemWrapper extends Component {
@@ -23,8 +24,8 @@ class TaskItemWrapper extends Component {
     return (
       <div className="task-item">
         <TaskItem {...this.props}/>
-        <OfferCreate task={this.props.task} />
-        <Offers {...this.props}/>
+        <OfferCreate/>
+        <OfferList/>
       </div>
     );
   }
@@ -49,16 +50,6 @@ class TaskItem extends Component {
             </div>
           </div>
         </div>
-      </div>
-    );
-  }
-}
-
-class Offers extends Component {
-  render () {
-    return (
-      <div className="container">
-        <div className="task-item__offers">Заявки</div>
       </div>
     );
   }

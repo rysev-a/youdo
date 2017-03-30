@@ -25,8 +25,8 @@ task_fields = {
     'name': fields.String,
     'description': fields.String,
     'status': fields.String,
-    'customer_id': fields.String,
-    'executor_id': fields.String,
+    'customer_id': fields.Integer,
+    'executor_id': fields.Integer,
     'category': fields.Nested(task_category_fields)
 }
 
@@ -37,8 +37,7 @@ class TaskList(Resource):
         per_page = 10
         task_count = Task.query.count()
         page_count = math.ceil(task_count / per_page)
-        print(page_count)
-
+        
         parser = reqparse.RequestParser()
         parser.add_argument('page', type=int)
         args = parser.parse_args()

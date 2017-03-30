@@ -1,6 +1,7 @@
 from flask_script import Manager
 from .models import Task, TaskCategory
 from ..database import db
+from ..users.models import User
 import yaml
 
 
@@ -39,7 +40,6 @@ def mock():
 
     for task in task_data['tasks']:
         task['category_id'] = categories[task['category']]
+        task['customer_id'] = User.query.first().id
         del task['category']
         create_task(task)
-    
-            

@@ -4,20 +4,17 @@ import {combineReducers} from 'redux'
 
 const defaultState = ()=> {
   return {
-    message: 'Готов выполнить вашу задачу, буду рад сотрудничать',
+    message: 'Рад вашему отклику, надеюсь на качественное выполнение',
     price: 0
   }
 };
 
 function data (state=defaultState(), action) {
   switch (action.type) {
-    case constants.INIT_OFFER_CREATE:
+    case constants.INIT_OFFER_DIALOG:
       return Object.assign({}, state, action.payload);
 
-    case constants.RESET_OFFER_CREATE:
-      return defaultState();
-
-    case constants.UPDATE_OFFER_CREATE:
+    case constants.UPDATE_OFFER_DIALOG:
       let {field, value} = action.payload;
       return Object.assign({}, state, {[field]: value});
 
@@ -28,14 +25,14 @@ function data (state=defaultState(), action) {
 
 function errors (state=defaultState(), action) {
   switch (action.type) {
-    case constants.RESET_OFFER_CREATE:
+    case constants.RESET_OFFER_DIALOG:
       return defaultState();
 
-    case constants.UPDATE_OFFER_CREATE:
+    case constants.UPDATE_OFFER_DIALOG:
       let {field} = action.payload;
       return Object.assign({}, state, {[field]: ''});
 
-    case constants.SUBMIT_OFFER_CREATE_ERROR:
+    case constants.SUBMIT_OFFER_DIALOG_ERROR:
       return action.payload;
 
     default:
@@ -46,24 +43,42 @@ function errors (state=defaultState(), action) {
 const defaultStatus = ()=> {
   return {
     isOpen: false,
-    loaded: false,
-    visible: false
+    loaded: false
   }
 };
 
 function status(state=defaultStatus(), action) {
   switch (action.type) {
-    case constants.OPEN_OFFER_CREATE:
+    case constants.OPEN_OFFER_DIALOG:
       return Object.assign({}, state, {isOpen: true});
 
-    case constants.CLOSE_OFFER_CREATE:
+    case constants.CLOSE_OFFER_DIALOG:
       return Object.assign({}, state, {isOpen: false});
 
-    case constants.INIT_OFFER_CREATE:
+    case constants.INIT_OFFER_DIALOG:
       return Object.assign({}, state, {loaded: true});
 
-    case constants.RESET_OFFER_CREATE:
+    case constants.RESET_OFFER_DIALOG:
       return defaultStatus();
+
+    default:
+      return state;
+  }
+}
+
+function list (state=[], action) {
+  switch (action.type) {
+    case constants.CLOSE_OFFER_DIALOG:
+    case constants.OPEN_OFFER_DIALOG:
+    case constants.UPDATE_OFFER_DIALOG:
+
+      return state.map(offer => {
+        if (offer.id == action.payload.id) {
+          return combineReducers({data, erros, status})(offer, action);
+        }
+
+        return offer;
+      });
 
     default:
       return state;

@@ -19,6 +19,10 @@ class OfferCreate extends Component {
       'is-open': this.props.offer.status.isOpen
     });
 
+    if (this.props.hidden) {
+      return <div className="offer-create hidden"/>
+    }
+
     if (this.props.offer.status.loaded == false) {
       return (
         <div className="container">
@@ -70,7 +74,7 @@ class Buttons extends Component {
           <a className="button button-success"
              onClick={this.submit.bind(this)}>Отправить</a>
           <a className="button button-primary"
-             onClick={this.props.close}>Закрыть</a>
+             onClick={this.props.close}>Отмена</a>
         </div>
       )
     }
@@ -85,7 +89,7 @@ class Buttons extends Component {
 
   submit () {
     let offer = {
-      customer_id: this.props.profile.data.id,
+      executor_id: this.props.profile.data.id,
       task_id: this.props.task.data.id,
       message: this.props.offer.data.message,
       price: this.props.offer.data.price
