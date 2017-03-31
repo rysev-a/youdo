@@ -18,8 +18,8 @@ class ProfileDropdown extends Component {
   }
 
   componentWillUnmount () {
-    this.mounted = false
-    document.removeEventListener('click', this.handleDocumentClick, false)
+    this.mounted = false;
+    document.removeEventListener('click', this.handleDocumentClick, false);
     document.removeEventListener('touchend', this.handleDocumentClick, false)
   }
 
@@ -31,7 +31,7 @@ class ProfileDropdown extends Component {
         <a className="navbar__links-item navbar__links-profile"
            onClick={this.toggleDropdown.bind(this)}>
           <i className="material-icons">account_circle</i>
-          <span>Профиль</span>
+          <span>{this.props.currentUser.first_name}</span>
           <div className="caret"></div>
         </a>
         <div className="dropdown-menu" onClick={this.toggleDropdown.bind(this)}>

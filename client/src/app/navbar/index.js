@@ -1,18 +1,18 @@
-import view from './view';
-import {connect} from 'react-redux';
-import actions from 'app/profile/current/actions';
+import view from './view'
+import {connect} from 'react-redux'
+import actions from 'app/profile/current/actions'
 
 
-let mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
   return {currentUser: state.profile.current.data}
-}
+};
 
-let mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     logout: () => {
       dispatch(actions.logout());
     }
   };
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(view)

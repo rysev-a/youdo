@@ -30,7 +30,7 @@ class Navbar extends Component {
         <NavbarItem title="Найти задачу"
                 icon="search"
                 to="/tasks/list" />
-        <ProfileDropdown logout={this.props.logout}/>
+        <ProfileDropdown {...this.props}/>
       </div>
     );
   }

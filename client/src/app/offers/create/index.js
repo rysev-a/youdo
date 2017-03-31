@@ -4,10 +4,10 @@ import actions from './actions'
 import view from './view'
 
 const checkHidden = (profile, task, offers) => {
-
   // check offers
+
   if (offers.data.filter(offer =>
-    offer.executor.id == profile.data.id).length) {
+    offer.data.executor.id == profile.data.id).length) {
     return true;
   }
 

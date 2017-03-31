@@ -5,19 +5,31 @@
     margin 20px 0 10px
 
 .offer-list__item
-  margin 2px 0
-
-  .message
-    .message-sender
-      font-size 20px
-      color mainColor
-      margin 10px 0 0
-
   .item-title
     font-size 24px
-    padding 0 0 20px
 
-  .item__actions
-    padding-top 20px
+  .dialog__form
+    overflow hidden
+    max-height 0
+    opacity 0
+    transition all ease-in-out 0.3s
 
+    textarea
+      width 100%
+      height 60px
 
+  .is-open
+    opacity 1
+    max-height 200px
+
+  .hidden
+    display none
+
+.message-list
+  margin-bottom 20px
+
+  .message
+    padding 10px 0 0
+
+  .message-sender
+    color mainColor
