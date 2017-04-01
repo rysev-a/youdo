@@ -43,4 +43,18 @@ function errors (state=defaultState(), action) {
   }
 }
 
-export default combineReducers({data, errors})
+function status (state={processing: false}, action) {
+  switch (action.type) {
+    case constants.SUBMIT_TASK_CREATE:
+      return Object.assign({}, state, {processing: true});
+
+    case constants.SUBMIT_TASK_CREATE_SUCCESS:
+    case constants.SUBMIT_TASK_CREATE_ERROR:
+      return Object.assign({}, state, {processing: false});
+
+    default:
+      return state;
+  }
+}
+
+export default combineReducers({data, errors, status})

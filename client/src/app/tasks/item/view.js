@@ -48,6 +48,10 @@ class TaskItem extends Component {
             <div className="task-item__description">
               {task.data.price}
             </div>
+            <h3>Заказчик</h3>
+            <div className="task-item__customer">
+              {task.data.customer.first_name}
+            </div>
           </div>
         </div>
       </div>

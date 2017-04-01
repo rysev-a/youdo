@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import React from 'react'
 import {Component} from 'react'
 import Offer from './offer'
@@ -9,7 +10,10 @@ class OfferList extends Component {
 
   render () {
     return (
-      <div className="offer-list">
+      <div className={classNames({
+          "offer-list": true,
+          "hidden": this.props.offers.data.length === 0
+        })}>
         <div className="container">
           <h3 className="offer-list-title">Заявки</h3>
           {this.props.offers.data.map(

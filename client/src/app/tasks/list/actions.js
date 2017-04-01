@@ -1,8 +1,8 @@
-import constants from 'app/constants';
-import api from '../api';
+import constants from 'app/constants'
+import api from '../api'
 
 
-let actions = { 
+export default {
   fetch: (page)=> {
     return (dispatch)=> {
       dispatch({type: constants.FETCH_TASK_LIST});
@@ -17,6 +17,3 @@ let actions = {
     }
   }
 }
-
-
-export default actions

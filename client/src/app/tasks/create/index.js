@@ -1,24 +1,36 @@
-import {connect} from 'react-redux';
-import actions from './actions';
-import categoryActions from 'app/categories/actions';
-import view from './view';
+import {bindActionCreators} from 'redux'
+import {connectAdvanced} from 'react-redux'
+import createActions from './actions'
+import categoryActions from 'app/categories/actions'
+import view from './view'
+import shallowEqual from 'shallowequal'
 
 
-const mapStateToProps = (state)=> {
-  return {
-    create: state.tasks.create,
-    categories: state.categories
+function selectorFactory(dispatch) {
+  let state = {};
+  let ownProps = {};
+  let result = {};
+  const actions = bindActionCreators({
+    ...createActions,
+    ...categoryActions,
+  }, dispatch);
+
+  const submit = (task) => actions.submit({
+    ...task,
+    customer_id: state.profile.current.data.id
+  });
+
+  return (nextState, nextOwnProps) => {
+    const categories = nextState.categories;
+    const create = nextState.tasks.create;
+    const nextResult = {...nextOwnProps, categories, create, ...actions, submit};
+
+
+    state = nextState;
+    ownProps = nextOwnProps;
+    if (!shallowEqual(result, nextResult)) result = nextResult;
+    return result
   }
-};
+}
 
-const mapDispatchToProps = (dispatch)=> {
-  return {
-    update: (field, value)=> dispatch(actions.update(field, value)),
-    reset: ()=> dispatch(actions.reset()),
-    submit: (task)=> dispatch(actions.submit(task)),
-    fetchCategories: ()=> dispatch(categoryActions.fetch())
-  }
-};
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(view)
+export default connectAdvanced(selectorFactory)(view)

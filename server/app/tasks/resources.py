@@ -1,8 +1,9 @@
 import math
+import time
 from flask_restful import Resource, reqparse, fields, marshal
 from flask import request, jsonify, json
 
-from ..users.models import User
+
 from ..database import db
 from .models import Task, TaskCategory
 from .forms import TaskForm
@@ -31,8 +32,16 @@ task_fields = {
 }
 
 
-#Tasks API
+def processing(func):
+    def decorator(*args, **kwargs):
+        time.sleep(3)
+        return func(*args, **kwargs)
+    return decorator
+
+
+# Tasks API
 class TaskList(Resource):
+    method_decorators = [processing]
     def get(self):
         per_page = 10
         task_count = Task.query.count()
@@ -65,9 +74,8 @@ class TaskList(Resource):
         return marshal(task, task_fields)
 
 
-
-
 class TaskItem(Resource):
+    method_decorators = [processing]
     def get(self, id):
         task = Task.query.get(id)
         if not task:
@@ -94,7 +102,7 @@ class TaskItem(Resource):
         return {'message': 'deletion complete'}, 200
 
 
-#Categories API
+# Categories API
 class TaskCategoryList(Resource):
     def get(self):
         task_categories = TaskCategory.query.all()

@@ -10,6 +10,7 @@ import tasks from 'app/tasks';
 import actions from 'app/profile/current/actions';
 store.dispatch(actions.fetch());
 
+
 render(
   <Provider store={store}>
     <Router history={browserHistory}>

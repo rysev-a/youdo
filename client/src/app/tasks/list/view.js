@@ -52,16 +52,16 @@ class Filter extends Component {
           <div className="radio">
             <label>
               <input type="radio" name="optionsRadios"/>
-              <span className="circle"></span>
-              <span className="check"></span>
+              <span className="circle"/>
+              <span className="check"/>
               Возрастанию
             </label>
           </div>
           <div className="radio">
             <label>
               <input type="radio" name="optionsRadios"/>
-              <span className="circle"></span>
-              <span className="check"></span>
+              <span className="circle"/>
+              <span className="check"/>
               Убыванию
             </label>
           </div>
@@ -147,11 +147,7 @@ class Pagination extends Component {
 
   fetch (page) {
     this.props.fetch(page);
-    let timerID = setInterval(()=> {
-        window.scrollBy(0, -10);
-        if( window.pageYOffset <= 80 )
-            clearInterval(timerID);
-    }, 10);
+    window.scrollTo(0, 0);
   }
 
   getCssClass (page) {

@@ -1,12 +1,13 @@
 import classNames from 'classnames'
 import React from 'react'
 import {Component} from 'react'
+import Loader from 'app/core/components/loader';
 
 
 class TaskCreate extends Component {
   componentDidMount () {
     if (this.props.categories.length === 0) {
-      this.props.fetchCategories();
+      this.props.fetch();
     }
   }
 
@@ -36,6 +37,7 @@ class TaskCreateForm extends Component {
 
     return (
       <div className="task-create__form">
+        <Loader hidden={!this.props.create.status.processing} />
         <div className={this.formItemClassName('name')}>
           <input type="text" className="form-control"
                  onChange={this.update.bind(this, 'name')}  />
