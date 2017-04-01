@@ -3,10 +3,10 @@ import api from '../api'
 
 
 export default {
-  fetch: (page)=> {
+  fetch: (page, sort={})=> {
     return (dispatch)=> {
       dispatch({type: constants.FETCH_TASK_LIST});
-      api.list(page)
+      api.list(page, sort)
         .then((response) => response.json())
         .then((json) => {
           dispatch({
@@ -14,6 +14,15 @@ export default {
             payload: json
           });
         })
+    }
+  },
+
+  sort: (params)=> {
+    return (dispatch)=> {
+      dispatch({
+        type: constants.UPDATE_TASK_LIST_SORT,
+        payload: params
+      });
     }
   }
 }

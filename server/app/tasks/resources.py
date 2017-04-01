@@ -28,13 +28,14 @@ task_fields = {
     'status': fields.String,
     'customer_id': fields.Integer,
     'executor_id': fields.Integer,
-    'category': fields.Nested(task_category_fields)
+    'category': fields.Nested(task_category_fields),
+    'create_datetime': fields.DateTime
 }
 
 
 def processing(func):
     def decorator(*args, **kwargs):
-        time.sleep(3)
+        # time.sleep(3)
         return func(*args, **kwargs)
     return decorator
 
@@ -49,14 +50,26 @@ class TaskList(Resource):
         
         parser = reqparse.RequestParser()
         parser.add_argument('page', type=int)
+        parser.add_argument('sort', type=str)
+
         args = parser.parse_args()
         page = args.get('page')
+        sort = args.get('sort')
+
+        tasks = Task.query
+
+        #apply sort
+        if sort and json.loads(sort):
+            sort = json.loads(sort)
+            order_tempate = "{} {}".format(sort.get('type'), sort.get('order'))
+            tasks = tasks.order_by(order_tempate)
+
+        # apply pagination
         if page:
-            tasks = Task.query.limit(per_page).offset((page - 1) * per_page).all()
-        else:
-            tasks = Task.query.all()
+            tasks = tasks.limit(per_page).offset((page - 1) * per_page)
+
         return {
-            'data': marshal(tasks, task_fields),
+            'data': marshal(tasks.all(), task_fields),
             'page': page,
             'page_count': page_count
         }, 200

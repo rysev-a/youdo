@@ -1,4 +1,4 @@
-from sqlalchemy.orm import relationship
+from datetime import datetime
 from ..database import db
 
 
@@ -16,6 +16,7 @@ class Task(db.Model):
     description = db.Column(db.String(length=500))
     status = db.Column(db.String(length=10), default='waiting')
     price = db.Column(db.Integer, default=0)
+    create_datetime = db.Column(db.DateTime, default=datetime.utcnow)
 
 
 class TaskCategory(db.Model):

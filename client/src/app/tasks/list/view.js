@@ -1,7 +1,9 @@
+import Moment from 'moment'
 import classNames from 'classnames'
 import React from 'react'
 import {Component} from 'react'
 import {Link} from 'react-router'
+import Loader from 'app/core/components/loader'
 
 
 class TaskList extends Component {
@@ -18,11 +20,12 @@ class TaskList extends Component {
             <div className="card-content">
               <div className="row">
                 <div className="col-md-3">
-                  <Filter {...this.props}/>
+                  <Sort {...this.props}/>
                 </div>
                 <div className="col-md-9">
                   <List {...this.props.tasks}/>
                   <Pagination status={this.props.tasks.status}
+                              sort={this.props.tasks.sort}
                               fetch={this.props.fetch}/>
                 </div>
               </div>
@@ -34,24 +37,27 @@ class TaskList extends Component {
   }
 }
 
-class Filter extends Component {
+class Sort extends Component {
   render () {
     return (
       <div className="task-list__filter">
-
         <div className="filter-item filter-sort">
           <div className="filter-item">
             Сортировать по:
-            <select className="form-control">
-              <option>Дате</option>
-              <option>Рейтингу</option>
-              <option>Цене</option>
+            <select className="form-control"
+              onChange={this.sort('type')}
+              value={this.props.tasks.sort.type}>
+              <option value="create_datetime">Дате</option>
+              <option value="price">Цене</option>
             </select>
           </div>
 
           <div className="radio">
             <label>
-              <input type="radio" name="optionsRadios"/>
+              <input type="radio"
+                     value="asc"
+                     onChange={this.sort('order')}
+                     name="optionsRadios"/>
               <span className="circle"/>
               <span className="check"/>
               Возрастанию
@@ -59,7 +65,10 @@ class Filter extends Component {
           </div>
           <div className="radio">
             <label>
-              <input type="radio" name="optionsRadios"/>
+              <input value="desc"
+                     type="radio"
+                     onChange={this.sort('order')}
+                     name="optionsRadios"/>
               <span className="circle"/>
               <span className="check"/>
               Убыванию
@@ -69,21 +78,28 @@ class Filter extends Component {
       </div>
     );
   }
+
+  sort (field) {
+    return (e)=> {
+      this.props.sort({[field]: e.target.value});
+      this.props.fetch(
+        this.props.tasks.status.page,
+        Object.assign({}, this.props.tasks.sort, {[field]: e.target.value})
+      );
+    };
+  }
 }
 
 class List extends Component {
   render () {
-    if (this.props.status.loaded) {
-      return (
-        <div className="task-list__content">
-          {this.props.data.map((task)=> 
-            <TaskItem key={task.id} {...task} />
-          )}
-        </div>
-      );     
-    }
-
-    return <div>...loading</div>;
+    return (
+      <div className="task-list__content">
+        <Loader hidden={!this.props.status.processing} />
+        {this.props.data.map((task)=>
+          <TaskItem key={task.id} {...task} />
+        )}
+      </div>
+    );
   }
 }
 
@@ -94,9 +110,12 @@ class TaskItem extends Component {
       <Link className="task-list__item"
             to={`/tasks/${task.id}`}
             key={task.id}>
-        <div className="task-list__item-title">{task.name}</div>
+        <div className="task-list__item-title">{task.name} {task.price} Р</div>
         <div className="task-list__item-description">{task.description}</div>
         <div className="task-list__item-info">
+          <span className="create-datetime">{
+            Moment(task.create_datetime).format('YYYY.MM.DD HH:mm:ss')
+          }</span>
           <span className="view-count task-list__item-info__item">
             <span className="view-count__title">Просмотров: </span>
             <span className="view-count__value">8</span>
@@ -133,7 +152,7 @@ class Pagination extends Component {
   goNext () {
     let page = this.props.status.page + 1;
     if (page <= this.props.status.page_count) {
-      this.fetch(page);
+      this.props.fetch(page, this.props.sort);
     }
   }
 
@@ -141,13 +160,8 @@ class Pagination extends Component {
     let page = this.props.status.page - 1;
 
     if (page > 0) {
-      this.fetch(page);
+      this.props.fetch(page, this.props.sort);
     }
-  }
-
-  fetch (page) {
-    this.props.fetch(page);
-    window.scrollTo(0, 0);
   }
 
   getCssClass (page) {
@@ -161,7 +175,7 @@ class Pagination extends Component {
     page++;
     return <a key={page}
               className={this.getCssClass(page)}
-              onClick={()=> (this.fetch(page))}>{page}</a>;
+              onClick={()=> (this.props.fetch(page, this.props.sort))}>{page}</a>;
   }
 }
 

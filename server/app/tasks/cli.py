@@ -37,7 +37,7 @@ def mock():
     categories = dict((category.title, category.id)
         for category in TaskCategory.query.all())
 
-
+    import time
     for task in task_data['tasks']:
         task['category_id'] = categories[task['category']]
         task['customer_id'] = User.query.first().id
