@@ -47,7 +47,7 @@ const defaultStatus = ()=> {
   return {
     isOpen: false,
     loaded: false,
-    visible: false
+    processing: false
   }
 };
 
@@ -61,6 +61,13 @@ function status(state=defaultStatus(), action) {
 
     case constants.INIT_OFFER_CREATE:
       return Object.assign({}, state, {loaded: true});
+
+    case constants.SUBMIT_OFFER_CREATE:
+      return Object.assign({}, state, {processing: true});
+
+    case constants.SUBMIT_OFFER_CREATE_SUCCESS:
+    case constants.SUBMIT_OFFER_CREATE_ERROR:
+      return Object.assign({}, state, {processing: false});
 
     case constants.RESET_OFFER_CREATE:
       return defaultStatus();

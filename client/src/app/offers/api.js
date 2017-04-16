@@ -16,7 +16,35 @@ let api = {
       credentials: 'include',
       body: JSON.stringify(offer)
     });
+  },
+
+  accept: (offerID, data)=> {
+    return fetch(`${baseUrl}/${offerID}/accept`, {
+      method: 'post',
+      headers: API_HEADERS,
+      credentials: 'include',
+      body: JSON.stringify(data)
+    });
+  },
+
+  confirm: (offerID, data)=> {
+    return fetch(`${baseUrl}/${offerID}/confirm`, {
+      method: 'post',
+      headers: API_HEADERS,
+      credentials: 'include',
+      body: JSON.stringify(data)
+    });
+  },
+
+  complete: (offerID, data)=> {
+    return fetch(`${baseUrl}/${offerID}/complete`, {
+      method: 'post',
+      headers: API_HEADERS,
+      credentials: 'include',
+      body: JSON.stringify(data)
+    });
   }
+
 };
 
 export default api

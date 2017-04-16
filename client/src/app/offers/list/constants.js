@@ -7,7 +7,18 @@
   CLOSE_OFFER_DIALOG: 'close offer dialog',
   INIT_OFFER_DIALOG: 'init offer dialog',
   UPDATE_OFFER_DIALOG: 'update offer dialog',
-  SUBMIT_OFFER_DIALOG: 'submit offer dialog',
-  SUBMIT_OFFER_DIALOG_SUCCESS: 'submit offer dialog success',
-  SUBMIT_OFFER_DIALOG_ERROR: 'submit offer dialog error'
+
+  ACCEPT_OFFER_DIALOG: 'accept offer dialog',
+  ACCEPT_OFFER_DIALOG_SUCCESS: 'accept offer dialog success',
+  ACCEPT_OFFER_DIALOG_ERROR: 'accept offer dialog error',
+
+  CONFIRM_OFFER_DIALOG: 'confirm offer dialog',
+  CONFIRM_OFFER_DIALOG_SUCCESS: 'confirm offer dialog success',
+  CONFIRM_OFFER_DIALOG_ERROR: 'confirm offer dialog error',
+
+  COMPLETE_OFFER_DIALOG: 'complete offer dialog',
+  COMPLETE_OFFER_DIALOG_SUCCESS: 'complete offer dialog success',
+  COMPLETE_OFFER_DIALOG_ERROR: 'complete offer dialog error'
+
+
 }

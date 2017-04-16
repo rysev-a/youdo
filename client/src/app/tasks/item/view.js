@@ -4,6 +4,7 @@ import {Component} from 'react'
 import Loader from 'app/core/components/loader'
 import OfferCreate from 'app/offers/create'
 import OfferList from 'app/offers/list'
+import {getStatusText} from 'app/core/helpers/localization'
 
 
 class TaskItemWrapper extends Component {
@@ -18,7 +19,7 @@ class TaskItemWrapper extends Component {
 
   render () {
     if (!this.props.task.status.loaded) {
-      return <Loader hidden={false}/>
+      return <Loader processing={true}/>
     }
 
     return (
@@ -51,6 +52,10 @@ class TaskItem extends Component {
             <h3>Заказчик</h3>
             <div className="task-item__customer">
               {task.data.customer.first_name}
+            </div>
+            <h3>Статус</h3>
+            <div className="task-item__status">
+              {getStatusText(task.data.status)}
             </div>
           </div>
         </div>

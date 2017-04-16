@@ -24,3 +24,12 @@ class Message(db.Model):
     sender_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     sender = db.relationship('User')
     content = db.Column(db.String(length=500))
+
+'''
+offer statuses:
+  waiting
+  accepted
+  running
+  completed
+  failed
+'''

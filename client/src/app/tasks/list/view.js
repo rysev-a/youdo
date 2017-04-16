@@ -56,6 +56,7 @@ class Sort extends Component {
             <label>
               <input type="radio"
                      value="asc"
+                     checked={this.props.tasks.sort.order == 'asc'}
                      onChange={this.sort('order')}
                      name="optionsRadios"/>
               <span className="circle"/>
@@ -94,7 +95,7 @@ class List extends Component {
   render () {
     return (
       <div className="task-list__content">
-        <Loader hidden={!this.props.status.processing} />
+        <Loader processing={this.props.status.processing} />
         {this.props.data.map((task)=>
           <TaskItem key={task.id} {...task} />
         )}

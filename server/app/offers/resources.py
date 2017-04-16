@@ -1,3 +1,4 @@
+import json
 from flask import jsonify
 from flask_restful import (Resource, marshal,
                            fields, request, reqparse)
@@ -25,12 +26,21 @@ offer_fields = {
     'executor': fields.Nested(user_fields),
     'messages': fields.List(fields.Nested(message_fields)),
     'task_id': fields.Integer,
-    'price': fields.Integer
+    'price': fields.Integer,
+    'status': fields.String
 }
+
+import time
+def processing(func):
+    def decorator(*args, **kwargs):
+        #time.sleep(3)
+        return func(*args, **kwargs)
+    return decorator
 
 
 # Offer API
 class OfferList(Resource):
+    method_decorators = [processing]
     def get(self):
         parser = reqparse.RequestParser()
         parser.add_argument('task', type=int)
@@ -71,3 +81,44 @@ class OfferList(Resource):
         db.session.commit()
 
         return marshal(offer, offer_fields)
+
+
+class OfferAccept(Resource):
+    def post(self, id):
+        # send message
+        message = Message(**request.json.get('message'))
+        db.session.add(message)
+
+        # update offer
+        offer = Offer.query.get(id)
+        offer.status = 'accepted'
+        offer.task.status = 'accepted'
+        db.session.commit()
+        return marshal(offer, offer_fields), 200
+
+
+class OfferConfirm(Resource):
+    def post(self, id):
+        # send message
+        message = Message(**request.json.get('message'))
+        db.session.add(message)
+
+        # update offer
+        offer = Offer.query.get(id)
+        offer.status = 'running'
+        offer.task.status = 'running'
+        db.session.commit()
+        return marshal(offer, offer_fields), 200
+
+class OfferComplete(Resource):
+    def post(self, id):
+        # send message
+        message = Message(**request.json.get('message'))
+        db.session.add(message)
+
+        # update offer
+        offer = Offer.query.get(id)
+        offer.status = 'completed'
+        offer.task.status = 'completed'
+        db.session.commit()
+        return marshal(offer, offer_fields), 200

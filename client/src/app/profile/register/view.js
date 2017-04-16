@@ -14,7 +14,7 @@ class RegisterView extends FormTemplate {
             <div className="card-title">Введите данные</div>
           </div>
           <div className="card-content">
-            <Loader hidden={!this.props.formData.status.loading} />
+            <Loader processing={this.props.formData.status.loading} />
             <FormItem placeholder='Электронная почта'
                       error={this.getError('email')}
                       autoFocus={true}

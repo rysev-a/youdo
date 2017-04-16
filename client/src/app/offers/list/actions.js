@@ -32,7 +32,71 @@ export default {
     payload: offer
   }),
 
-  submit: (offer)=> ((dispatch)=> {
-    console.log(offer);
-  })
+  accept: (offer, customer)=> {
+    return (dispatch)=> {
+      api.accept(offer.data.id, {
+        message: {
+          offer_id: offer.data.id,
+          sender_id: customer.data.id,
+          content: offer.dialog.message
+        },
+        price: offer.dialog.price
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          dispatch({
+            type: constants.ACCEPT_OFFER_DIALOG_SUCCESS,
+            payload: json
+          });
+        })
+
+    }
+  },
+
+  confirm: (offer, executor)=> {
+    return (dispatch)=> {
+      api.confirm(offer.data.id, {
+        message: {
+          offer_id: offer.data.id,
+          sender_id: executor.data.id,
+          content: offer.dialog.message
+        }
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          dispatch({
+            type: constants.CONFIRM_OFFER_DIALOG_SUCCESS,
+            payload: json
+          });
+          dispatch({
+            type: constants.CLOSE_OFFER_DIALOG,
+            payload: offer
+          });
+        })
+    }
+  },
+
+  complete: (offer, executor)=> {
+    return (dispatch)=> {
+      api.complete(offer.data.id, {
+        message: {
+          offer_id: offer.data.id,
+          sender_id: executor.data.id,
+          content: offer.dialog.message
+        }
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          dispatch({
+            type: constants.COMPLETE_OFFER_DIALOG_SUCCESS,
+            payload: json
+          });
+          dispatch({
+            type: constants.CLOSE_OFFER_DIALOG,
+            payload: offer
+          });
+        })
+    }
+  }
+
 }

@@ -14,11 +14,6 @@ class OfferCreate extends Component {
   }
 
   render () {
-    let className = classNames({
-      'offer-create__form': true,
-      'is-open': this.props.offer.status.isOpen
-    });
-
     if (this.props.hidden) {
       return <div className="offer-create hidden"/>
     }
@@ -28,17 +23,23 @@ class OfferCreate extends Component {
         <div className="container">
           <div className="card">
             <div className="card-content">
-              <Loader />
+              <Loader processing={true}/>
             </div>
           </div>
         </div>
       );
     }
 
+    let className = classNames({
+      'offer-create__form': true,
+      'is-open': this.props.offer.status.isOpen
+    });
+
     return (
       <div className="offer-create container">
         <div className="card">
           <div className="card-content">
+            <Loader processing={this.props.offer.status.processing} />
             <div className={className}>
               <div className="form-item">
                 <input type="number" className="form-control"

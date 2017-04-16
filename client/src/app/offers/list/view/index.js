@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import React from 'react'
 import {Component} from 'react'
 import Offer from './offer'
+import Loader from 'app/core/components/loader'
 
 class OfferList extends Component {
   componentDidMount() {
@@ -10,15 +11,15 @@ class OfferList extends Component {
 
   render () {
     return (
-      <div className={classNames({
-          "offer-list": true,
-          "hidden": this.props.offers.data.length === 0
-        })}>
+      <div className="offer-list">
         <div className="container">
           <h3 className="offer-list-title">Заявки</h3>
-          {this.props.offers.data.map(
-            offer => (<Offer offer={offer} key={offer.data.id} {...this.props} />)
-          )}
+          <Loader processing={this.props.offers.status.processing} />
+          <div className="offer-list__content">
+            {this.props.offers.data.map(
+              offer => (<Offer offer={offer} key={offer.data.id} {...this.props} />)
+            )}
+          </div>
         </div>
       </div>
     );

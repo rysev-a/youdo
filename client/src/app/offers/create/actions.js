@@ -4,18 +4,10 @@ import api from '../api'
 
 
 export default {
-  reset: ()=> {
-    return {
-      type: constants.RESET_OFFER_CREATE
-    };
-  },
-
-  update: (field, value)=> {
-    return {
-      type: constants.UPDATE_OFFER_CREATE,
-      payload: {field, value}
-    };
-  },
+  update: (field, value)=> ({
+    type: constants.UPDATE_OFFER_CREATE,
+    payload: {field, value}
+  }),
 
   submit: function (task) {
     return requestAction(api.add(task), {
@@ -29,6 +21,8 @@ export default {
     type: constants.INIT_OFFER_CREATE,
     payload: offer
   }),
+
+  reset: ()=> ({type: constants.RESET_OFFER_CREATE}),
 
   open: ()=> ({type: constants.OPEN_OFFER_CREATE}),
 

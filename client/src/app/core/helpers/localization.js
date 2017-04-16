@@ -22,3 +22,15 @@ const translateError = (errorContent)=> {
 export const getErrorText = (errorData)=> {
   return translateError(unpackError(errorData));
 };
+
+
+export const getStatusText = (status) => {
+  const statuses = {
+    waiting: 'Поиск заказчика',
+    accepted: 'Выбор заказчика',
+    running: 'Заказчик определен',
+    completed: 'Задача выполнена'
+  };
+
+  return statuses[status];
+};

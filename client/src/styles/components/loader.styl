@@ -9,8 +9,8 @@
   box-sizing border-box
   display -ms-flexbox
   display flex
-  -ms-flex: 0 1 auto
-  flex: 0 1 auto
+  -ms-flex 0 1 auto
+  flex 0 1 auto
   -ms-flex-direction column
   flex-direction column
   -ms-flex-positive 1
@@ -23,16 +23,15 @@
   align-items center
   -ms-flex-pack: center
   justify-content center
-  background rgba(#fff, 0.5)
-  z-index 2
-  opacity 1
-  visibility visible
   transition all ease-in-out 0.3s
-  
-  &.hidden
-    visibility hidden
-    opacity 0
+  visibility hidden
+  opacity 0
 
+  &.processing
+    background rgba(#fff, 0.5)
+    z-index 2
+    opacity 1
+    visibility visible
 
 @-webkit-keyframes scale
   0%
