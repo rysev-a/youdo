@@ -10,6 +10,10 @@ class OfferList extends Component {
   }
 
   render () {
+    if (this.props.offers.data.length === 0) {
+      return false;
+    }
+
     return (
       <div className="offer-list">
         <div className="container">
