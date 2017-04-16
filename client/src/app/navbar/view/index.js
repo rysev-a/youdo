@@ -1,9 +1,9 @@
-import React from 'react';
-import {Component} from 'react';
-import ReactDOM from 'react-dom'
-import {IndexLink, Link} from 'react-router';
-import NavbarItem from './navbar-item';
-import ProfileDropdown from './profile-dropdown';
+import React from 'react'
+import {Component} from 'react'
+import {Link} from 'react-router'
+import NavbarItem from './navbar-item'
+import ProfileDropdown from './profile-dropdown'
+import Notifications from './notifications'
 
 
 class Navbar extends Component {
@@ -31,6 +31,8 @@ class Navbar extends Component {
                 icon="search"
                 to="/tasks/list" />
         <ProfileDropdown {...this.props}/>
+        <Notifications {...this.props}/>
+
       </div>
     );
   }

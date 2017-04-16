@@ -7,7 +7,7 @@ from ..database import db
 user_manager = Manager()
 @user_manager.command
 def create_user(email):
-    user = User(email=email)
+    user = User(email=email, password='123')
     db.session.add(user)
     db.session.commit()
 

@@ -9,6 +9,7 @@ from .resources import (
     ProfileEdit
 )
 
+
 # User API
 api.add_resource(UserList, '/api/v1/users')
 api.add_resource(UserItem, '/api/v1/users/<int:id>')

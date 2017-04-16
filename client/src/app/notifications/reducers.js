@@ -4,8 +4,19 @@ import constants from 'app/constants'
 
 function data (state=[], action) {
   switch (action.type) {
-    case constants.FETCH_TASK_LIST_SUCCESS:
+    case constants.FETCH_NOTIFICATION_LIST_SUCCESS:
       return action.payload.data;
+
+    case constants.READ_NOTIFICATION_SUCCESS:
+      return state.map( notification => {
+        if (notification.id === action.payload.id) {
+          return action.payload;
+        }
+
+        return notification;
+      });
+      return state;
+
 
     default:
       return state;
@@ -23,10 +34,10 @@ const defaultStatus = ()=> {
 
 function status (state=defaultStatus(), action) {
   switch (action.type) {
-    case constants.FETCH_TASK_LIST:
+    case constants.FETCH_NOTIFICATION_LIST:
       return Object.assign({}, state, {processing: true});
 
-    case constants.FETCH_TASK_LIST_SUCCESS:
+    case constants.FETCH_NOTIFICATION_LIST_SUCCESS:
       return {
         processing: false,
         loaded: true,
@@ -34,7 +45,7 @@ function status (state=defaultStatus(), action) {
         page_count: action.payload.page_count
       };
 
-    case constants.FETCH_TASK_LIST_ERROR:
+    case constants.FETCH_NOTIFICATION_LIST_ERROR:
       return Object.assing({}, state, {processing: false});
 
     default:
@@ -42,14 +53,4 @@ function status (state=defaultStatus(), action) {
   }
 }
 
-function sort (state={type: 'create_datetime', order: 'asc'}, action) {
-  switch (action.type) {
-    case constants.UPDATE_TASK_LIST_SORT:
-      return Object.assign({}, state, action.payload);
-
-    default:
-      return state;
-  }
-}
-
-export default combineReducers({data, status, sort})
+export default combineReducers({data, status})

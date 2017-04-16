@@ -44,6 +44,26 @@ navbar-link()
       .caret
         margin-left 5px
 
+    &-item&-notifications
+      position relative
+
+      .count
+        background dangerColor
+        color #fff
+        position absolute
+        top 12px
+        right 16px
+        font-size 11px
+        text-align center
+        line-height 16px
+        height 16px
+        width 16px
+        border-radius 16px
+        box-shadow 0 2px 5px 0 rgba(0, 0, 0, 0.26)
+
+      .hidden
+        display none
+
 
     .dropdown
       display inline-block
@@ -56,6 +76,7 @@ navbar-link()
         z-index 10000
         opacity 0
         top 100%
+        right 0
         visibility hidden
         transition all 150ms linear
         box-shadow 0 2px 5px 0 rgba(0, 0, 0, 0.26)
@@ -88,3 +109,14 @@ navbar-link()
           opacity 1
           visibility visible
           margin-top 0
+
+      &.notifications
+        .dropdown-menu
+          padding 0
+          margin 0
+          min-width 250px
+
+          &__item
+            padding 12px 10px
+            margin 0
+            border-bottom 1px solid rgba(defaultColor, 0.5)

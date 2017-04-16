@@ -6,7 +6,8 @@ from .api import api
 from .migrate import migrate
 
 # import app modules
-from app import users, tasks, offers
+from app import users, tasks, offers, notifications
+
 
 def create_app(settings):
     app = Flask(__name__)
@@ -16,5 +17,5 @@ def create_app(settings):
     login_manager.init_app(app)
     api.init_app(app)
     migrate.init_app(app, db)
-    
+
     return app

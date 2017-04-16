@@ -5,6 +5,8 @@ from flask_restful import (Resource, marshal,
 
 
 from ..database import db
+from ..notifications.signals import create_notification
+from ..tasks.models import Task
 from .models import Offer, Message
 from .forms import OfferForm
 
@@ -41,6 +43,7 @@ def processing(func):
 # Offer API
 class OfferList(Resource):
     method_decorators = [processing]
+
     def get(self):
         parser = reqparse.RequestParser()
         parser.add_argument('task', type=int)
@@ -80,6 +83,14 @@ class OfferList(Resource):
         db.session.add(message)
         db.session.commit()
 
+        task = Task.query.get(request.json.get('task_id'))
+
+        create_notification.send(
+            task_id=task.id,
+            user_id=task.customer_id,
+            content='Запрос на выполнение задачи'
+        )
+
         return marshal(offer, offer_fields)
 
 
@@ -94,6 +105,13 @@ class OfferAccept(Resource):
         offer.status = 'accepted'
         offer.task.status = 'accepted'
         db.session.commit()
+
+        create_notification.send(
+            task_id=offer.task.id,
+            user_id=offer.executor_id,
+            content='Одобрение запроса на выполнение задачи'
+        )
+
         return marshal(offer, offer_fields), 200
 
 
@@ -108,6 +126,13 @@ class OfferConfirm(Resource):
         offer.status = 'running'
         offer.task.status = 'running'
         db.session.commit()
+
+        create_notification.send(
+            task_id=offer.task.id,
+            user_id=offer.task.customer_id,
+            content='Исполнитель приступил к выполнению задачи'
+        )
+
         return marshal(offer, offer_fields), 200
 
 class OfferComplete(Resource):
@@ -121,4 +146,11 @@ class OfferComplete(Resource):
         offer.status = 'completed'
         offer.task.status = 'completed'
         db.session.commit()
+
+        create_notification.send(
+            task_id=offer.task.id,
+            user_id=offer.task.customer_id,
+            content='Ваша задача выполнена'
+        )
+
         return marshal(offer, offer_fields), 200

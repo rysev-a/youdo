@@ -13,6 +13,13 @@ class TaskItemWrapper extends Component {
     this.props.fetch(id);
   }
 
+  componentDidUpdate () {
+    const {id} = this.props.params;
+    if (id != this.props.task.data.id && this.props.task.status.loaded) {
+      this.props.fetch(id);
+    }
+  }
+
   componentWillUnmount () {
     this.props.reset();
   }
