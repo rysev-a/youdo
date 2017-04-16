@@ -154,6 +154,7 @@ class Pagination extends Component {
     let page = this.props.status.page + 1;
     if (page <= this.props.status.page_count) {
       this.props.fetch(page, this.props.sort);
+      window.scrollTo(0,0);
     }
   }
 
@@ -162,6 +163,7 @@ class Pagination extends Component {
 
     if (page > 0) {
       this.props.fetch(page, this.props.sort);
+      window.scrollTo(0,0);
     }
   }
 
@@ -176,7 +178,10 @@ class Pagination extends Component {
     page++;
     return <a key={page}
               className={this.getCssClass(page)}
-              onClick={()=> (this.props.fetch(page, this.props.sort))}>{page}</a>;
+              onClick={()=> {
+                this.props.fetch(page, this.props.sort);
+                window.scrollTo(0,0);
+              }}>{page}</a>;
   }
 }
 
