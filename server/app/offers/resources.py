@@ -124,9 +124,13 @@ class OfferConfirm(Resource):
         # update offer
         offer = Offer.query.get(id)
         offer.status = 'running'
+
+        # update task
         offer.task.status = 'running'
+        offer.task.executor_id = offer.executor.id
         db.session.commit()
 
+        # send notification
         create_notification.send(
             task_id=offer.task.id,
             user_id=offer.task.customer_id,

@@ -4,7 +4,7 @@ import {Link} from 'react-router'
 import NavbarItem from './navbar-item'
 import ProfileDropdown from './profile-dropdown'
 import Notifications from './notifications'
-
+import TaskMenu from './task-menu'
 
 class Navbar extends Component {
   render() {
@@ -30,9 +30,9 @@ class Navbar extends Component {
         <NavbarItem title="Найти задачу"
                 icon="search"
                 to="/tasks/list" />
+        <TaskMenu/>
         <ProfileDropdown {...this.props}/>
         <Notifications {...this.props}/>
-
       </div>
     );
   }

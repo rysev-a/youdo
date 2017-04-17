@@ -1,11 +1,12 @@
-import React from 'react';
-import {Component} from 'react';
-import {Route} from 'react-router';
+import React from 'react'
+import {Component} from 'react'
+import {Route} from 'react-router'
 
-import Login from './login';
-import Register from './register';
-import Edit from './edit';
-import Settings from './settings';
+import Login from './login'
+import Register from './register'
+import Edit from './edit'
+import Settings from './settings'
+import Tasks from './tasks'
 
 
 export default (
@@ -14,5 +15,6 @@ export default (
     <Route path='/profile/register' component={Register}/>
     <Route path='/profile/edit' component={Edit}/>
     <Route path='/profile/settings' component={Settings}/>
+    <Route path='/profile/tasks/:type' component={Tasks}/>
   </Route>
 )

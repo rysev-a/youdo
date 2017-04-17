@@ -45,24 +45,34 @@ class TaskList(Resource):
     method_decorators = [processing]
     def get(self):
         per_page = 10
-        task_count = Task.query.count()
-        page_count = math.ceil(task_count / per_page)
-        
+
         parser = reqparse.RequestParser()
         parser.add_argument('page', type=int)
         parser.add_argument('sort', type=str)
+        parser.add_argument('filter', type=str)
 
         args = parser.parse_args()
         page = args.get('page')
         sort = args.get('sort')
+        filter = args.get('filter')
 
         tasks = Task.query
 
-        #apply sort
+        # apply sort
         if sort and json.loads(sort):
             sort = json.loads(sort)
             order_tempate = "{} {}".format(sort.get('type'), sort.get('order'))
             tasks = tasks.order_by(order_tempate)
+
+        # apply filter
+        if filter and json.loads(filter):
+            filter = json.loads(filter)
+            for key in filter.keys():
+                tasks = tasks.filter_by(**{key: filter[key]})
+
+        # get pagination data
+        task_count = tasks.count()
+        page_count = math.ceil(task_count / per_page)
 
         # apply pagination
         if page:

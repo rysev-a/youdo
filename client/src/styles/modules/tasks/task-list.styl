@@ -36,9 +36,8 @@
       &__item
         padding-left 10px
 
-
-.task-list__filter
-  .filter-item
+.task-list__sort
+  .sort-form
     select
       width 50%
       cursor pointer
@@ -46,14 +45,16 @@
     .radio
       display inline-block
 
-.filter-sort
-  .radio
-    &:nth-child(2)
-      position relative
-      left -10px
+    .radio
+      &:nth-child(2)
+        position relative
+        left -10px
 
 .task-list__pagination
   margin 20px 0
+
+  &.hidden
+    display none
 
   &__item
     display inline-block
@@ -79,7 +80,9 @@
     &.next
     &.prev
       padding 0 11px
-      
+      &.hidden
+       display none
+
     &.active
       background-color mainColor
       border-color mainColor

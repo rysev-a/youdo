@@ -1,4 +1,4 @@
-import settings from 'app/settings';
+import settings from 'app/settings'
 
 
 const {API_URL, API_HEADERS} = settings;
