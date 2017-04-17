@@ -1,6 +1,6 @@
 import {bindActionCreators} from 'redux'
 import {connectAdvanced} from 'react-redux'
-import actions from './actions'
+import actions from 'app/tasks/list/actions'
 import view from './view'
 import shallowEqual from 'shallowequal'
 
@@ -12,13 +12,13 @@ function selectorFactory(dispatch) {
 
   const taskListActions = bindActionCreators(actions, dispatch);
   const fetch = () => taskListActions.fetch({
-    page: state.profile.tasks.pagination.page,
-    sort: state.profile.tasks.sort,
-    filter: state.profile.tasks.filter
+    page: state.tasks.list.pagination.page,
+    sort: state.tasks.list.sort,
+    filter: state.tasks.list.filter
   });
 
   return (nextState, nextOwnProps) => {
-    const tasks = nextState.profile.tasks;
+    const tasks = nextState.tasks.list;
     const currentUser = nextState.profile.current;
     const nextResult = {...nextOwnProps, tasks, currentUser, ...taskListActions, fetch};
 

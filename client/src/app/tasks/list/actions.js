@@ -17,6 +17,8 @@ export default {
     }
   },
 
+  reset: ()=> ({type: constants.RESET_TASK_LIST}),
+
   sort: (params)=> {
     return (dispatch)=> {
       dispatch({

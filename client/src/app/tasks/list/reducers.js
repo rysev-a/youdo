@@ -33,6 +33,9 @@ function status (state=defaultStatus(), action) {
     case constants.FETCH_TASK_LIST_ERROR:
       return Object.assing({}, state, {processing: false});
 
+    case constants.RESET_TASK_LIST:
+      return defaultStatus();
+
     default:
       return state;
   }
@@ -48,6 +51,9 @@ function pagination (state={page: 1, page_count: 0}, action) {
     case constants.UPDATE_TASK_LIST_PAGINATION:
       return Object.assign({}, state, action.payload);
 
+    case constants.RESET_TASK_LIST:
+      return {page: 1, page_count: 0};
+
     default:
       return state;
   }
@@ -58,6 +64,9 @@ function filter (state={}, action) {
     case constants.SET_TASK_LIST_FILTER:
       return action.payload;
 
+    case constants.RESET_TASK_LIST:
+      return {};
+
     default:
       return state;
   }
@@ -67,6 +76,9 @@ function sort (state={type: 'create_datetime', order: 'asc'}, action) {
   switch (action.type) {
     case constants.UPDATE_TASK_LIST_SORT:
       return Object.assign({}, state, action.payload);
+
+    case constants.RESET_TASK_LIST:
+      return {type: 'create_datetime', order: 'asc'};
 
     default:
       return state;
