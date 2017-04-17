@@ -1,32 +1,15 @@
 import React, {Component} from 'react'
-import Loader from 'app/core/components/loader'
 import List from './list'
 import Sort from './sort'
 import Pagination from './pagination'
 
 
-class TaskListAuthorizationWrapper extends Component {
-  render () {
-    if (this.props.currentUser.status.loaded) {
-      return <TaskList {...this.props}/>
-    }
-    return <Loader processing={true} />
-  }
-}
-
 class TaskList extends Component {
   componentDidMount () {
-    this.updateFilters();
     this.props.fetch();
   }
 
   componentDidUpdate (prev) {
-    // on url param changes update filter
-    if (prev.params.type !== this.props.params.type) {
-      this.updateFilters();
-    }
-
-    // on filter, pagination, sort change update tasks
     if (
       prev.tasks.filter != this.props.tasks.filter ||
       prev.tasks.pagination.page != this.props.tasks.pagination.page ||
@@ -35,15 +18,6 @@ class TaskList extends Component {
       this.props.fetch();
       window.scrollTo(0, 0);
     }
-  }
-
-  updateFilters () {
-    const paramMap = {
-      executed: {executor_id: this.props.currentUser.data.id},
-      created: {customer_id: this.props.currentUser.data.id}
-    };
-
-    this.props.filter(paramMap[this.props.params.type]);
   }
 
   render () {
@@ -72,4 +46,4 @@ class TaskList extends Component {
   }
 }
 
-export default TaskListAuthorizationWrapper
+export default TaskList

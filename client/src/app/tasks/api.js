@@ -5,9 +5,10 @@ const {API_URL, API_HEADERS} = settings;
 const baseUrl = `${API_URL}/tasks`;
 
 let api = {
-  list: (page, sort)=> {
+  list: (page, sort, filter)=> {
     sort = JSON.stringify(sort);
-    return fetch(`${baseUrl}?page=${page}&sort=${sort}`);
+    filter = JSON.stringify(filter);
+    return fetch(`${baseUrl}?page=${page}&sort=${sort}&filter=${filter}`);
   },
 
   item: (id)=> {

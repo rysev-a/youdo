@@ -15,9 +15,7 @@ function data (state=[], action) {
 const defaultStatus = ()=> {
   return {
     processing: false,
-    loaded: false,
-    page: 1,
-    page_count: 0
+    loaded: false
   }
 };
 
@@ -29,13 +27,36 @@ function status (state=defaultStatus(), action) {
     case constants.FETCH_TASK_LIST_SUCCESS:
       return {
         processing: false,
-        loaded: true,
-        page: action.payload.page,
-        page_count: action.payload.page_count
+        loaded: true
       };
 
     case constants.FETCH_TASK_LIST_ERROR:
       return Object.assing({}, state, {processing: false});
+
+    default:
+      return state;
+  }
+}
+
+function pagination (state={page: 1, page_count: 0}, action) {
+  switch (action.type) {
+    case constants.FETCH_TASK_LIST_SUCCESS:
+      return Object.assign({}, state, {
+        page_count: action.payload.page_count
+      });
+
+    case constants.UPDATE_TASK_LIST_PAGINATION:
+      return Object.assign({}, state, action.payload);
+
+    default:
+      return state;
+  }
+}
+
+function filter (state={}, action) {
+  switch (action.type) {
+    case constants.SET_TASK_LIST_FILTER:
+      return action.payload;
 
     default:
       return state;
@@ -52,4 +73,10 @@ function sort (state={type: 'create_datetime', order: 'asc'}, action) {
   }
 }
 
-export default combineReducers({data, status, sort})
+export default combineReducers({
+  data,
+  status,
+  sort,
+  filter,
+  pagination
+})
