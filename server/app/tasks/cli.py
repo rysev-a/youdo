@@ -1,5 +1,7 @@
 from flask_script import Manager
 from .models import Task, TaskCategory
+from ..notifications.models import Notification
+from ..offers.models import Offer, Message
 from ..database import db
 from ..users.models import User
 import yaml
@@ -20,6 +22,9 @@ def create_task(task_data):
 
 @task_manager.command
 def mock():
+    Notification.query.delete()
+    Message.query.delete()
+    Offer.query.delete()
     Task.query.delete()
     TaskCategory.query.delete()
     db.session.commit()

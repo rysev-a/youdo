@@ -66,9 +66,7 @@ class TaskList(Resource):
 
         # apply filter
         if filter and json.loads(filter):
-            filter = json.loads(filter)
-            for key in filter.keys():
-                tasks = tasks.filter_by(**{key: filter[key]})
+            tasks = self.apply_filter(tasks, filter)
 
         # get pagination data
         task_count = tasks.count()
@@ -95,6 +93,19 @@ class TaskList(Resource):
         db.session.add(task)
         db.session.commit()
         return marshal(task, task_fields)
+
+    def apply_filter(self, tasks, filter):
+        filter = json.loads(filter)
+        for key in filter.keys():
+            if key == 'statuses':
+                tasks = self.apply_status_filter(tasks, filter['statuses'])
+            else:
+                tasks = tasks.filter_by(**{key: filter[key]})
+
+        return tasks
+
+    def apply_status_filter(self, tasks, statuses):
+        return tasks.filter(Task.status.in_(tuple(statuses)))
 
 
 class TaskItem(Resource):

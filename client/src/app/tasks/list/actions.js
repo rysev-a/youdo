@@ -33,6 +33,11 @@ export default {
     payload: params
   }),
 
+  updateFilter: (params)=> ({
+    type: constants.UPDATE_TASK_LIST_FILTER,
+    payload: params
+  }),
+
   pagination: (params)=> ({
     type: constants.UPDATE_TASK_LIST_PAGINATION,
     payload: params

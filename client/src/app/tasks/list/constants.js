@@ -5,5 +5,6 @@
   UPDATE_TASK_LIST_SORT:       'update task list sort',
   UPDATE_TASK_LIST_PAGINATION: 'update task list pagination',
   SET_TASK_LIST_FILTER:        'set task list filter',
+  UPDATE_TASK_LIST_FILTER:     'update task list filter',
   RESET_TASK_LIST:             'reset task list'
 }

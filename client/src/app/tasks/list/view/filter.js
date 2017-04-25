@@ -1,45 +1,59 @@
 import React, {Component} from 'react'
+import {getStatusText} from 'app/core/helpers/localization'
+import settings from 'app/settings'
 
 
-const updateHandler = (field, update) =>
-  (e)=> update({[field]: e.target.value});
+const updateStatus = (field, update, statuses) => 
+  (e)=> {
+    if (statuses.filter(s => s == e.target.name).length) {
+      update({'statuses': statuses.filter(s => s != e.target.name)})
+    } else {
+      update({'statuses': [...statuses, e.target.name]});
+    }
+  };
 
+const updateAll = (update, set, statuses) => ()=> {
+  if (statuses.length == 6) {
+    update({statuses: []});
+  } else {
+    update({statuses: settings.STATUSES})
+  }
+}
 
-export default ({filter, update}) =>
+const getChecked = (status, statuses) => 
+  statuses.filter(s => s == status).length;
+
+const checkItem = (update, statuses, status) => {
+  return <div className="checkbox" key={status}>
+    <label>
+      <input type="checkbox"
+             checked={getChecked(status, statuses)}
+             onChange={updateStatus('status', update, statuses)}
+             name={status}/>
+      <span className="checkbox-material">
+        <span className="check"></span>
+      </span>
+      {getStatusText(status)}
+    </label>
+  </div>
+}
+
+export default ({filter, set, update}) =>
     <div className="task-list__filter">
-      <div className="filter-item filter-sort">
-        <div className="filter-item">
-          Сортировать по:
-          <select className="form-control"
-            onChange={updateHandler('type', update)}
-            value={sort.type}>
-            <option value="create_datetime">Дате</option>
-            <option value="price">Цене</option>
-          </select>
-        </div>
-
-        <div className="radio">
+      <div className="filter-item statuses">
+        Отображать задачи:
+        <div className="checkbox">
           <label>
-            <input type="radio"
-                   value="asc"
-                   checked={sort.order == 'asc'}
-                   onChange={updateHandler('order', update)}
-                   name="optionsRadios"/>
-            <span className="circle"/>
-            <span className="check"/>
-            Возрастанию
+            <input type="checkbox"
+                   checked={filter.statuses.length == 6}
+                   onChange={updateAll(update, set, filter.statuses)} />
+            <span className="checkbox-material">
+              <span className="check"></span>
+            </span>
+            Все задачи
           </label>
         </div>
-        <div className="radio">
-          <label>
-            <input value="desc"
-                   type="radio"
-                   onChange={updateHandler('order', update)}
-                   name="optionsRadios"/>
-            <span className="circle"/>
-            <span className="check"/>
-            Убыванию
-          </label>
-        </div>
+        <hr/>
+        {settings.STATUSES.map(checkItem.bind(null, update, filter.statuses))}
       </div>
     </div>

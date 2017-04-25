@@ -54,18 +54,31 @@ function pagination (state={page: 1, page_count: 0}, action) {
     case constants.RESET_TASK_LIST:
       return {page: 1, page_count: 0};
 
+    case constants.SET_TASK_LIST_FILTER:
+    case constants.UPDATE_TASK_LIST_FILTER:
+      return Object.assign({}, state, {
+        page: 1
+      });
+
     default:
       return state;
   }
 }
 
-function filter (state={}, action) {
+const defaultFilterState = ()=> ({
+  statuses: []
+});
+
+function filter (state=defaultFilterState(), action) {
   switch (action.type) {
     case constants.SET_TASK_LIST_FILTER:
-      return action.payload;
+      return Object.assign({}, defaultFilterState(), action.payload);
+
+    case constants.UPDATE_TASK_LIST_FILTER:
+      return Object.assign({}, state, action.payload);
 
     case constants.RESET_TASK_LIST:
-      return {};
+      return defaultFilterState();
 
     default:
       return state;

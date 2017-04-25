@@ -28,6 +28,7 @@ class Message(db.Model):
 '''
 offer statuses:
   waiting
+  choising
   accepted
   running
   completed

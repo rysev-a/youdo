@@ -66,6 +66,12 @@ const isDialogHidden = ({offer, task, currentUser}) => {
     return true;
   }
 
+  if (currentUser.data.id == offer.data.executor.id && 
+      task.data.status == 'choising'
+    ) {
+    return true;
+  }
+
   if (currentUser.data.id == task.data.customer.id &&
       offer.data.status == 'accepted') {
     return true;

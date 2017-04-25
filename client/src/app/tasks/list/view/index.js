@@ -2,10 +2,12 @@ import React, {Component} from 'react'
 import List from './list'
 import Sort from './sort'
 import Pagination from './pagination'
+import Filter from './filter'
 
 
 class TaskList extends Component {
   componentDidMount () {
+    this.updateFilters();
     this.props.fetch();
   }
 
@@ -20,6 +22,12 @@ class TaskList extends Component {
     }
   }
 
+  updateFilters () {
+    this.props.updateFilter({
+      statuses: ['waiting', 'accepted']
+    });
+  }
+
   render () {
     return (
       <div className="task-list">
@@ -31,6 +39,10 @@ class TaskList extends Component {
                 <div className="col-md-3">
                   <Sort sort={this.props.tasks.sort}
                         update={this.props.sort}/>
+
+                  <Filter filter={this.props.tasks.filter}
+                          set={this.props.filter}
+                          update={this.props.updateFilter}/>
                 </div>
                 <div className="col-md-9">
                   <List {...this.props.tasks}/>

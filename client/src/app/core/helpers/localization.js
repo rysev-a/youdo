@@ -27,9 +27,11 @@ export const getErrorText = (errorData)=> {
 export const getStatusText = (status) => {
   const statuses = {
     waiting: 'Поиск заказчика',
-    accepted: 'Выбор заказчика',
+    choising: 'Выбор заказчика',
+    accepted: 'Ожидание ответа от заказчика',
     running: 'Заказчик определен',
-    completed: 'Задача выполнена'
+    completed: 'Задача выполнена',
+    failed: 'Задача провалена'
   };
 
   return statuses[status];

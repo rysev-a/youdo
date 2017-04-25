@@ -73,6 +73,7 @@ class OfferList(Resource):
         offer = Offer(**request.json)
         db.session.add(offer)
         db.session.commit()
+        offer.task.status = 'choising'
 
         message = Message(
             content=message_content,

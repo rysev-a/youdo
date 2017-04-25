@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import settings from 'app/settings'
 import Loader from 'app/core/components/loader'
 import TaskListView from 'app/tasks/list/view'
 
@@ -19,7 +20,7 @@ class TaskListAuthorizationWrapper extends Component {
 class TaskList extends TaskListView {
   componentDidMount () {
     this.updateFilters();
-    super.componentDidMount();
+    this.props.fetch();
   }
 
   componentDidUpdate (prev) {
@@ -39,6 +40,7 @@ class TaskList extends TaskListView {
     };
 
     this.props.filter(paramMap[this.props.params.type]);
+    this.props.updateFilter({statuses: settings.STATUSES});
   }
 }
 
