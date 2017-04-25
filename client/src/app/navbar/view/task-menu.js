@@ -42,9 +42,6 @@ class TaskMenu extends Component {
           <Link className="dropdown-menu__item" to="/profile/tasks/executed">
             Исполняемые
           </Link>
-          <Link className="dropdown-menu__item" to="/profile/tasks/requests">
-            Запросы
-          </Link>
         </div>
       </div>
     );
