@@ -24,7 +24,7 @@ class TaskList extends Component {
 
   updateFilters () {
     this.props.updateFilter({
-      statuses: ['waiting', 'accepted']
+      statuses: ['waiting', 'choising']
     });
   }
 
